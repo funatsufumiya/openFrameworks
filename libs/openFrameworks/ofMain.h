@@ -43,7 +43,8 @@
 // gl
 #include "ofCubeMap.h"
 #include "ofFbo.h"
-#include "ofGLRenderer.h"
+// #include "ofGLRenderer.h"
+#include "ofPGLRenderer.h"
 #include "ofGLUtils.h"
 #include "ofLight.h"
 #include "ofMaterial.h"

@@ -150,8 +150,8 @@ enum ofTargetPlatform{
     #define TARGET_GLFW_WINDOW
     #define OF_CAIRO
     #define OF_RTAUDIO
-	#include "GL/glew.h"
-	#include "GL/wglew.h"
+	// #include "GL/glew.h"
+	// #include "GL/wglew.h"
 	#define __WINDOWS_DS__
 	#define __WINDOWS_MM__
 	#if (_MSC_VER)       // microsoft visual studio
@@ -211,8 +211,8 @@ enum ofTargetPlatform{
 	#endif
 
     
-	#include "GL/glew.h"
-    #include "OpenGL/OpenGL.h"
+	// #include "GL/glew.h"
+    // #include "OpenGL/OpenGL.h"
 
 	#if defined(__LITTLE_ENDIAN__)
 		#define TARGET_LITTLE_ENDIAN		// intel cpu
@@ -233,18 +233,18 @@ enum ofTargetPlatform{
 			#undef countof
 		#endif
 
-		#include <GLES/gl.h>
-		#include <GLES/glext.h>
-		#include <GLES2/gl2.h>
-		#include <GLES2/gl2ext.h>
+		// #include <GLES/gl.h>
+		// #include <GLES/glext.h>
+		// #include <GLES2/gl2.h>
+		// #include <GLES2/gl2ext.h>
 
 		#define EGL_EGLEXT_PROTOTYPES
-		#include <EGL/egl.h>
-		#include <EGL/eglext.h>
+		// #include <EGL/egl.h>
+		// #include <EGL/eglext.h>
 	#else // desktop linux
         #define TARGET_GLFW_WINDOW
         #define OF_RTAUDIO
-		#include <GL/glew.h>
+		// #include <GL/glew.h>
 	#endif
 
 	// for some reason, this isn't defined at compile time,
@@ -262,12 +262,12 @@ enum ofTargetPlatform{
 
 
 #ifdef TARGET_OF_IOS
-    #import <OpenGLES/ES1/gl.h>
-    #import <OpenGLES/ES1/glext.h>
-    #import <OpenGLES/ES2/gl.h>
-    #import <OpenGLES/ES2/glext.h>
-	#import <OpenGLES/ES3/gl.h>
-	#import <OpenGLES/ES3/glext.h>
+    // #import <OpenGLES/ES1/gl.h>
+    // #import <OpenGLES/ES1/glext.h>
+    // #import <OpenGLES/ES2/gl.h>
+    // #import <OpenGLES/ES2/glext.h>
+	// #import <OpenGLES/ES3/gl.h>
+	// #import <OpenGLES/ES3/glext.h>
     #define TARGET_LITTLE_ENDIAN    // arm cpu
     #if defined(__OBJC__) && !__has_feature(objc_arc)
         #warning "ARC (Automatic Reference Counting) is not enabled."
@@ -278,30 +278,33 @@ enum ofTargetPlatform{
 
 #ifdef TARGET_ANDROID
 	#include <typeinfo>
-	#include <GLES/gl.h>
+	// #include <GLES/gl.h>
 	#define GL_GLEXT_PROTOTYPES
-	#include <GLES/glext.h>
+	// #include <GLES/glext.h>
 
-	#include <GLES2/gl2.h>
-	#include <GLES2/gl2ext.h>
+	// #include <GLES2/gl2.h>
+	// #include <GLES2/gl2ext.h>
 
 	#define TARGET_LITTLE_ENDIAN
 #endif
 
 #ifdef TARGET_EMSCRIPTEN
 	#define GL_GLEXT_PROTOTYPES
-	#include <GLES/gl.h>
-	#include <GLES/glext.h>
-	#include <GLES2/gl2.h>
-	#include <GLES2/gl2ext.h>
-	#include <GLES3/gl3.h>
-	#include <GL/glew.h>
+	// #include <GLES/gl.h>
+	// #include <GLES/glext.h>
+	// #include <GLES2/gl2.h>
+	// #include <GLES2/gl2ext.h>
+	// #include <GLES3/gl3.h>
+	// #include <GL/glew.h>
 
-	#include "EGL/egl.h"
-	#include "EGL/eglext.h"
+	// #include "EGL/egl.h"
+	// #include "EGL/eglext.h"
 
 	#define TARGET_LITTLE_ENDIAN
 #endif
+
+// include portablegl instead of opengl
+#include "portablegl.h"
 
 #include <tesselator.h>
 typedef TESSindex ofIndexType;

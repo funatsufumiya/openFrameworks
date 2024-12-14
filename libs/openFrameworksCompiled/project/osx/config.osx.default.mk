@@ -287,6 +287,7 @@ PLATFORM_CFLAGS += -DUSE_FMOD=0
 ##########################################################################################
 
 PLATFORM_HEADER_SEARCH_PATHS =
+PLATFORM_HEADER_SEARCH_PATHS += $(OF_LIBS_PATH)/portablegl
 
 ##########################################################################################
 # PLATFORM LIBRARIES
@@ -353,7 +354,7 @@ PLATFORM_FRAMEWORKS += CoreServices
 PLATFORM_FRAMEWORKS += Metal
 PLATFORM_FRAMEWORKS += Foundation
 PLATFORM_FRAMEWORKS += IOKit
-PLATFORM_FRAMEWORKS += OpenGL
+# PLATFORM_FRAMEWORKS += OpenGL
 PLATFORM_FRAMEWORKS += QuartzCore
 PLATFORM_FRAMEWORKS += Security
 PLATFORM_FRAMEWORKS += SystemConfiguration

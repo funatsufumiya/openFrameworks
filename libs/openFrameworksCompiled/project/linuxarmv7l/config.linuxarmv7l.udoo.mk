@@ -68,9 +68,9 @@ PLATFORM_CFLAGS += -pipe
 # Note: Leave a leading space when adding list items with the += operator
 ################################################################################
 
-PLATFORM_LIBRARIES += GLESv1_CM
-PLATFORM_LIBRARIES += GLESv2
-PLATFORM_LIBRARIES += EGL
+# PLATFORM_LIBRARIES += GLESv1_CM
+# PLATFORM_LIBRARIES += GLESv2
+# PLATFORM_LIBRARIES += EGL
 
 
 ################################################################################

@@ -34,7 +34,6 @@ ofMainLoop::ofMainLoop()
 ,status(0)
 ,allowMultiWindow(true)
 ,escapeQuits(true){
-
 }
 
 ofMainLoop::~ofMainLoop() {
