@@ -56,24 +56,24 @@ int ofGetGLInternalFormat(const ofPixels& pixels) {
 
 //---------------------------------
 int ofGetGLInternalFormat(const ofShortPixels& pixels) {
-#ifndef TARGET_OPENGLES
-	switch(pixels.getNumChannels()) {
-//		case 3: return GL_RGB16;
-//		case 4: return GL_RGBA16;
-//		case 2:
+//#ifndef TARGET_OPENGLES
+//	switch(pixels.getNumChannels()) {
+////		case 3: return GL_RGB16;
+////		case 4: return GL_RGBA16;
+////		case 2:
+////			if(ofIsGLProgrammableRenderer()){
+////				return GL_RG16;
+////			}else{
+////				return GL_LUMINANCE16_ALPHA16;
+////			}
+//		default:
 //			if(ofIsGLProgrammableRenderer()){
-//				return GL_RG16;
+//				return GL_R16;
 //			}else{
-//				return GL_LUMINANCE16_ALPHA16;
+//				return GL_LUMINANCE16;
 //			}
-		default:
-			if(ofIsGLProgrammableRenderer()){
-				return GL_R16;
-			}else{
-				return GL_LUMINANCE16;
-			}
-	}
-#else
+//	}
+//#else
 	ofLogWarning("ofGLUtils") << "ofGetGLInternalFormat(): 16bit textures are not supported in OpenGL ES";
 	switch(pixels.getNumChannels()) {
 		case 3: return GL_RGB;
@@ -83,40 +83,40 @@ int ofGetGLInternalFormat(const ofShortPixels& pixels) {
 		default:
 			return GL_LUMINANCE;
 	}
-#endif
+//#endif
 }
 
 //---------------------------------
 int ofGetGLInternalFormat(const ofFloatPixels& pixels) {
-#if defined(TARGET_EMSCRIPTEN)
-	switch(pixels.getNumChannels()) {
-		case 3: return GL_RGB16F;
-		case 4: return GL_RGBA16F;
-		case 2:
-			ofLogWarning("ofGLUtils") << "ofGetGLInternalFormat(): two channel float textures not supported.";
-			return GL_RG16F;
-		default:
-			ofLogWarning("ofGLUtils") << "ofGetGLInternalFormat(): single channel float textures not supported.";
-			return GL_R16F;
-	}
-#elif !defined(TARGET_OPENGLES)
-	switch(pixels.getNumChannels()) {
-		case 3: return GL_RGB32F;
-		case 4: return GL_RGBA32F;
-		case 2:
-			if(ofIsGLProgrammableRenderer()){
-				return GL_RG32F;
-			}else{
-				return GL_LUMINANCE_ALPHA32F_ARB;
-			}
-		default:
-			if(ofIsGLProgrammableRenderer()){
-				return GL_R32F;
-			}else{
-				return GL_LUMINANCE32F_ARB;
-			}
-	}
-#else
+//#if defined(TARGET_EMSCRIPTEN)
+//	switch(pixels.getNumChannels()) {
+//		case 3: return GL_RGB16F;
+//		case 4: return GL_RGBA16F;
+//		case 2:
+//			ofLogWarning("ofGLUtils") << "ofGetGLInternalFormat(): two channel float textures not supported.";
+//			return GL_RG16F;
+//		default:
+//			ofLogWarning("ofGLUtils") << "ofGetGLInternalFormat(): single channel float textures not supported.";
+//			return GL_R16F;
+//	}
+//#elif !defined(TARGET_OPENGLES)
+//	switch(pixels.getNumChannels()) {
+//		case 3: return GL_RGB32F;
+//		case 4: return GL_RGBA32F;
+//		case 2:
+//			if(ofIsGLProgrammableRenderer()){
+//				return GL_RG32F;
+//			}else{
+//				return GL_LUMINANCE_ALPHA32F_ARB;
+//			}
+//		default:
+//			if(ofIsGLProgrammableRenderer()){
+//				return GL_R32F;
+//			}else{
+//				return GL_LUMINANCE32F_ARB;
+//			}
+//	}
+//#else
 	ofLogWarning("ofGLUtils") << "ofGetGLInternalFormat(): float textures not supported in OpenGL ES";
 	switch(pixels.getNumChannels()) {
 		case 3: return GL_RGB;
@@ -126,7 +126,7 @@ int ofGetGLInternalFormat(const ofFloatPixels& pixels) {
 		default:
 			return GL_LUMINANCE;
 	}
-#endif
+//#endif
 }
 
 //---------------------------------
@@ -135,25 +135,25 @@ string ofGetGLInternalFormatName(int glInternalFormat) {
 	switch(glInternalFormat) {
 		case GL_RGBA: return "GL_RGBA";
 #ifndef TARGET_OPENGLES
-		case GL_RGBA8: return "GL_RGBA8";
+//		case GL_RGBA8: return "GL_RGBA8";
 #endif
 		case GL_RGB: return "GL_RGB";
 #ifndef TARGET_OPENGLES
-		case GL_RGB8: return "GL_RGB8";
+//		case GL_RGB8: return "GL_RGB8";
 #endif
 		case GL_LUMINANCE: return "GL_LUMINANCE";
 #ifndef TARGET_OPENGLES
-		case GL_LUMINANCE8: return "GL_LUMINANCE8";
-		case GL_RGBA16: return "GL_RGBA16";
-		case GL_RGB16: return "GL_RGB16";
-		case GL_LUMINANCE16: return "GL_LUMINANCE16";
-		case GL_RGBA32F_ARB: return "GL_RGBA32F_ARB";
-		case GL_RGB32F_ARB: return "GL_RGB32F_ARB";
-		case GL_LUMINANCE32F_ARB: return "GL_LUMINANCE32F_ARB";
+//		case GL_LUMINANCE8: return "GL_LUMINANCE8";
+//		case GL_RGBA16: return "GL_RGBA16";
+//		case GL_RGB16: return "GL_RGB16";
+//		case GL_LUMINANCE16: return "GL_LUMINANCE16";
+//		case GL_RGBA32F_ARB: return "GL_RGBA32F_ARB";
+//		case GL_RGB32F_ARB: return "GL_RGB32F_ARB";
+//		case GL_LUMINANCE32F_ARB: return "GL_LUMINANCE32F_ARB";
 #endif
 		case GL_LUMINANCE_ALPHA: return "GL_LUMINANCE_ALPHA";
 #ifndef TARGET_OPENGLES
-		case GL_LUMINANCE8_ALPHA8: return "GL_LUMINANCE8_ALPHA8";
+//		case GL_LUMINANCE8_ALPHA8: return "GL_LUMINANCE8_ALPHA8";
 #endif
 		default: return "unknown glInternalFormat";
 	}
@@ -163,14 +163,14 @@ int ofGetGLFormatFromInternal(int glInternalFormat){
 	switch(glInternalFormat) {
 			case GL_RGBA:
 	#if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-			case GL_RGBA8:
-			case GL_RGBA16:
-			case GL_RGBA16F:
-		    case GL_RGBA16I:
-		    case GL_RGBA16UI:
-		    case GL_RGBA32F:
-		    case GL_RGBA32I:
-		    case GL_RGBA32UI:
+//			case GL_RGBA8:
+//			case GL_RGBA16:
+//			case GL_RGBA16F:
+//		    case GL_RGBA16I:
+//		    case GL_RGBA16UI:
+//		    case GL_RGBA32F:
+//		    case GL_RGBA32I:
+//		    case GL_RGBA32UI:
 	#endif
 				 return GL_RGBA;
 #ifdef TARGET_OF_IOS
@@ -181,73 +181,73 @@ int ofGetGLFormatFromInternal(int glInternalFormat){
 
 			case GL_RGB:
 	#if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-			case GL_RGB8:
-			case GL_RGB16:
-		    case GL_RGB16F:
-		    case GL_RGB16I:
-		    case GL_RGB16UI:
-		    case GL_RGB32F:
-		    case GL_RGB32I:
-		    case GL_RGB32UI:
+//			case GL_RGB8:
+//			case GL_RGB16:
+//		    case GL_RGB16F:
+//		    case GL_RGB16I:
+//		    case GL_RGB16UI:
+//		    case GL_RGB32F:
+//		    case GL_RGB32I:
+//		    case GL_RGB32UI:
 	#endif
 				return GL_RGB;
 
 
 			case GL_LUMINANCE:
 	#if !defined(TARGET_OPENGLES)
-			case GL_LUMINANCE8:
-			case GL_LUMINANCE16:
-			case GL_LUMINANCE32F_ARB:
+//			case GL_LUMINANCE8:
+//			case GL_LUMINANCE16:
+//			case GL_LUMINANCE32F_ARB:
 	#endif
 				 return GL_LUMINANCE;
 
 			case GL_LUMINANCE_ALPHA:
 	#if !defined(TARGET_OPENGLES)
-			case GL_LUMINANCE8_ALPHA8:
-			case GL_LUMINANCE16_ALPHA16:
-			case GL_LUMINANCE_ALPHA32F_ARB:
+//			case GL_LUMINANCE8_ALPHA8:
+//			case GL_LUMINANCE16_ALPHA16:
+//			case GL_LUMINANCE_ALPHA32F_ARB:
 	#endif
 				return GL_LUMINANCE_ALPHA;
 
 
-			case GL_DEPTH_STENCIL:
-				 return GL_DEPTH_STENCIL;
-
-			case GL_DEPTH_COMPONENT:
+//			case GL_DEPTH_STENCIL:
+//				 return GL_DEPTH_STENCIL;
+//
+//			case GL_DEPTH_COMPONENT:
 #if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-			case GL_DEPTH_COMPONENT16:
-			case GL_DEPTH_COMPONENT24:
-			case GL_DEPTH_COMPONENT32:
+//			case GL_DEPTH_COMPONENT16:
+//			case GL_DEPTH_COMPONENT24:
+//			case GL_DEPTH_COMPONENT32:
 #endif
-				return GL_DEPTH_COMPONENT;
+//				return GL_DEPTH_COMPONENT;
 
-			case GL_STENCIL_INDEX:
-				return GL_STENCIL_INDEX;
+//			case GL_STENCIL_INDEX:
+//				return GL_STENCIL_INDEX;
 
 #if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-			case GL_R8:
-			case GL_R16:
-		    case GL_R16I:
-		    case GL_R16UI:
-			case GL_R16F:
-			case GL_R32F:
-		    case GL_R32I:
-		    case GL_R32UI:
-				return GL_RED;
+//			case GL_R8:
+//			case GL_R16:
+//		    case GL_R16I:
+//		    case GL_R16UI:
+//			case GL_R16F:
+//			case GL_R32F:
+//		    case GL_R32I:
+//		    case GL_R32UI:
+//				return GL_RED;
 
-			case GL_RG8:
-			case GL_RG16:
-		    case GL_RG16I:
-		    case GL_RG16UI:
-			case GL_RG16F:
-			case GL_RG32F:
-		    case GL_RG32I:
-		    case GL_RG32UI:
-				return GL_RG;
+//			case GL_RG8:
+//			case GL_RG16:
+//		    case GL_RG16I:
+//		    case GL_RG16UI:
+//			case GL_RG16F:
+//			case GL_RG32F:
+//		    case GL_RG32I:
+//		    case GL_RG32UI:
+//				return GL_RG;
 #endif
 
 #ifndef TARGET_OPENGLES
-			case GL_ALPHA8:
+//			case GL_ALPHA8:
 #endif
 			case GL_ALPHA:
 				return GL_ALPHA;
@@ -268,13 +268,13 @@ int ofGetGLTypeFromInternal(int glInternalFormat){
 		case GL_LUMINANCE_ALPHA:
 		case GL_ALPHA:
 #ifndef TARGET_OPENGLES
-		case GL_LUMINANCE8:
-		case GL_LUMINANCE8_ALPHA8:
-		case GL_R8:
-		case GL_RG8:
-		case GL_RGB8:
-		case GL_RGBA8:
-		case GL_ALPHA8:
+//		case GL_LUMINANCE8:
+//		case GL_LUMINANCE8_ALPHA8:
+//		case GL_R8:
+//		case GL_RG8:
+//		case GL_RGB8:
+//		case GL_RGBA8:
+//		case GL_ALPHA8:
 #endif
 			 return GL_UNSIGNED_BYTE;
 
@@ -286,68 +286,68 @@ int ofGetGLTypeFromInternal(int glInternalFormat){
 #endif
 
 #if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-		case GL_LUMINANCE32F_ARB:
-		case GL_LUMINANCE_ALPHA32F_ARB:
-		case GL_R32F:
-		case GL_RG32F:
-		case GL_RGB32F:
-		case GL_RGBA32F:
-			return GL_FLOAT;
-
-		case GL_R16F:
-		case GL_RG16F:
-		case GL_RGB16F:
-		case GL_RGBA16F:
-		case GL_LUMINANCE16:
-		case GL_LUMINANCE16_ALPHA16:
-		case GL_R16:
-		case GL_RG16:
-		case GL_RGB16:
-		case GL_RGBA16:
-			return GL_HALF_FLOAT;
+//		case GL_LUMINANCE32F_ARB:
+//		case GL_LUMINANCE_ALPHA32F_ARB:
+//		case GL_R32F:
+//		case GL_RG32F:
+//		case GL_RGB32F:
+//		case GL_RGBA32F:
+//			return GL_FLOAT;
+//
+//		case GL_R16F:
+//		case GL_RG16F:
+//		case GL_RGB16F:
+//		case GL_RGBA16F:
+//		case GL_LUMINANCE16:
+//		case GL_LUMINANCE16_ALPHA16:
+//		case GL_R16:
+//		case GL_RG16:
+//		case GL_RGB16:
+//		case GL_RGBA16:
+//			return GL_HALF_FLOAT;
 #endif
 
-		case GL_DEPTH_STENCIL:
-			 return GL_UNSIGNED_INT_24_8;
+//		case GL_DEPTH_STENCIL:
+//			 return GL_UNSIGNED_INT_24_8;
 
-		case GL_DEPTH_COMPONENT:
+//		case GL_DEPTH_COMPONENT:
 #ifndef TARGET_OPENGLES
-		case GL_DEPTH_COMPONENT16:
-		case GL_R16UI:
-		case GL_RG16UI:
-		case GL_RGB16UI:
-		case GL_RGBA16UI:
+//		case GL_DEPTH_COMPONENT16:
+//		case GL_R16UI:
+//		case GL_RG16UI:
+//		case GL_RGB16UI:
+//		case GL_RGBA16UI:
 #endif
-			return GL_UNSIGNED_SHORT;
+//			return GL_UNSIGNED_SHORT;
 
 #ifndef TARGET_OPENGLES
-		case GL_R16I:
-		case GL_RG16I:
-		case GL_RGB16I:
-		case GL_RGBA16I:
-		    return GL_SHORT;
-#endif
-
-#ifndef TARGET_OPENGLES
-		case GL_DEPTH_COMPONENT24:
-		case GL_DEPTH_COMPONENT32:
-		case GL_R32UI:
-		case GL_RG32UI:
-		case GL_RGB32UI:
-		case GL_RGBA32UI:
-			return GL_UNSIGNED_INT;
+//		case GL_R16I:
+//		case GL_RG16I:
+//		case GL_RGB16I:
+//		case GL_RGBA16I:
+//		    return GL_SHORT;
 #endif
 
 #ifndef TARGET_OPENGLES
-		case GL_R32I:
-		case GL_RG32I:
-		case GL_RGB32I:
-		case GL_RGBA32I:
-		    return GL_INT;
+//		case GL_DEPTH_COMPONENT24:
+//		case GL_DEPTH_COMPONENT32:
+//		case GL_R32UI:
+//		case GL_RG32UI:
+//		case GL_RGB32UI:
+//		case GL_RGBA32UI:
+//			return GL_UNSIGNED_INT;
 #endif
 
-		case GL_STENCIL_INDEX:
-			return GL_UNSIGNED_BYTE;
+#ifndef TARGET_OPENGLES
+//		case GL_R32I:
+//		case GL_RG32I:
+//		case GL_RGB32I:
+//		case GL_RGBA32I:
+//		    return GL_INT;
+#endif
+
+//		case GL_STENCIL_INDEX:
+//			return GL_UNSIGNED_BYTE;
 
 		default:
 			ofLogError("ofGLUtils") << "ofGetGLTypeFromInternal(): unknown internal format " << glInternalFormat << ", returning GL_UNSIGNED_BYTE";
@@ -358,15 +358,15 @@ int ofGetGLTypeFromInternal(int glInternalFormat){
 
 //---------------------------------
 int ofGetGLType(const ofPixels & pixels) {
-#ifndef TARGET_OPENGLES
-	if(pixels.getPixelFormat() == OF_PIXELS_RGB565){
-		return GL_UNSIGNED_SHORT_5_6_5;
-	}else{
-#endif
+//#ifndef TARGET_OPENGLES
+//	if(pixels.getPixelFormat() == OF_PIXELS_RGB565){
+//		return GL_UNSIGNED_SHORT_5_6_5;
+//	}else{
+//#endif
 		return GL_UNSIGNED_BYTE;
-#ifndef TARGET_OPENGLES
-	}
-#endif
+//#ifndef TARGET_OPENGLES
+//	}
+//#endif
 }
 
 //---------------------------------
@@ -384,50 +384,50 @@ ofImageType ofGetImageTypeFromGLType(int glType){
 	switch(glType){
 	case GL_LUMINANCE:
 #if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-	case GL_LUMINANCE8:
-	case GL_LUMINANCE16:
-	case GL_LUMINANCE32F_ARB:
-	case GL_R8:
-	case GL_R16:
-	case GL_R16F:
-	case GL_R16I:
-	case GL_R16UI:
-	case GL_R32F:
-	case GL_R32I:
-	case GL_R32UI:
-	case GL_DEPTH_COMPONENT32F:
-	case GL_DEPTH_COMPONENT32:
-	case GL_DEPTH_COMPONENT16:
-	case GL_DEPTH_COMPONENT24:
-	case GL_DEPTH_COMPONENT:
+//	case GL_LUMINANCE8:
+//	case GL_LUMINANCE16:
+//	case GL_LUMINANCE32F_ARB:
+//	case GL_R8:
+//	case GL_R16:
+//	case GL_R16F:
+//	case GL_R16I:
+//	case GL_R16UI:
+//	case GL_R32F:
+//	case GL_R32I:
+//	case GL_R32UI:
+//	case GL_DEPTH_COMPONENT32F:
+//	case GL_DEPTH_COMPONENT32:
+//	case GL_DEPTH_COMPONENT16:
+//	case GL_DEPTH_COMPONENT24:
+//	case GL_DEPTH_COMPONENT:
 #endif
 		return OF_IMAGE_GRAYSCALE;
 
 
 	case GL_RGB:
 #if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-	case GL_RGB8:
-	case GL_RGB16:
-	case GL_RGB16F:
-	case GL_RGB16I:
-	case GL_RGB16UI:
-	case GL_RGB32F:
-	case GL_RGB32I:
-	case GL_RGB32UI:
+//	case GL_RGB8:
+//	case GL_RGB16:
+//	case GL_RGB16F:
+//	case GL_RGB16I:
+//	case GL_RGB16UI:
+//	case GL_RGB32F:
+//	case GL_RGB32I:
+//	case GL_RGB32UI:
 #endif
 		return OF_IMAGE_COLOR;
 
 
 	case GL_RGBA:
 #if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-	case GL_RGBA8:
-	case GL_RGBA16:
-	case GL_RGBA16F:
-	case GL_RGBA16I:
-	case GL_RGBA16UI:
-	case GL_RGBA32F:
-	case GL_RGBA32I:
-	case GL_RGBA32UI:
+//	case GL_RGBA8:
+//	case GL_RGBA16:
+//	case GL_RGBA16F:
+//	case GL_RGBA16I:
+//	case GL_RGBA16UI:
+//	case GL_RGBA32F:
+//	case GL_RGBA32I:
+//	case GL_RGBA32UI:
 #endif
 		return OF_IMAGE_COLOR_ALPHA;
 	}
@@ -515,8 +515,8 @@ GLuint ofGetGLPrimitiveMode(ofPrimitiveMode mode){
 		case OF_PRIMITIVE_TRIANGLE_STRIP_ADJACENCY:
 			return GL_TRIANGLE_STRIP_ADJACENCY;
 			break;
-		case OF_PRIMITIVE_PATCHES:
-			return GL_PATCHES;
+//		case OF_PRIMITIVE_PATCHES:
+//			return GL_PATCHES;
 			break;
 #endif
 		default:
@@ -550,21 +550,21 @@ ofPrimitiveMode ofGetOFPrimitiveMode(GLuint mode){
 			return OF_PRIMITIVE_POINTS;
 			break;
 #ifndef TARGET_OPENGLES
-		case GL_LINES_ADJACENCY:
-			return OF_PRIMITIVE_LINES_ADJACENCY;
-			break;
-		case GL_LINE_STRIP_ADJACENCY:
-			return OF_PRIMITIVE_LINE_STRIP_ADJACENCY;
-			break;
-		case GL_TRIANGLES_ADJACENCY:
-			return OF_PRIMITIVE_TRIANGLES_ADJACENCY;
-			break;
-		case GL_TRIANGLE_STRIP_ADJACENCY:
-			return OF_PRIMITIVE_TRIANGLE_STRIP_ADJACENCY;
-			break;
-		case GL_PATCHES:
-			return OF_PRIMITIVE_PATCHES;
-			break;
+//		case GL_LINES_ADJACENCY:
+//			return OF_PRIMITIVE_LINES_ADJACENCY;
+//			break;
+//		case GL_LINE_STRIP_ADJACENCY:
+//			return OF_PRIMITIVE_LINE_STRIP_ADJACENCY;
+//			break;
+//		case GL_TRIANGLES_ADJACENCY:
+//			return OF_PRIMITIVE_TRIANGLES_ADJACENCY;
+//			break;
+//		case GL_TRIANGLE_STRIP_ADJACENCY:
+//			return OF_PRIMITIVE_TRIANGLE_STRIP_ADJACENCY;
+//			break;
+//		case GL_PATCHES:
+//			return OF_PRIMITIVE_PATCHES;
+//			break;
 #endif
 		default:
 			ofLogError("ofGLUtils") << "ofGetOFPrimitiveMode(): unknown GL primitive mode " << ofToString(mode) << ", returning OF_PRIMITIVE_TRIANGLES";
@@ -607,26 +607,26 @@ int ofGetGLInternalFormatFromPixelFormat(ofPixelFormat pixelFormat){
 	case OF_PIXELS_U:
 	case OF_PIXELS_V:
 #ifndef TARGET_OPENGLES
-		if(ofIsGLProgrammableRenderer()){
-			return GL_R8;
-		}else{
+//		if(ofIsGLProgrammableRenderer()){
+//			return GL_R8;
+//		}else{
 #endif
 			return GL_LUMINANCE;
 #ifndef TARGET_OPENGLES
-		}
+//		}
 #endif
     case OF_PIXELS_GRAY_ALPHA:
 	case OF_PIXELS_YUY2:
 	case OF_PIXELS_UV:
 	case OF_PIXELS_VU:
 #ifndef TARGET_OPENGLES
-		if(ofIsGLProgrammableRenderer()){
-			return GL_RG8;
-		}else{
+//		if(ofIsGLProgrammableRenderer()){
+//			return GL_RG8;
+//		}else{
 #endif
 			return GL_LUMINANCE_ALPHA;
 #ifndef TARGET_OPENGLES
-		}
+//		}
 #endif
 	default:
 		ofLogError("ofGLUtils") << "ofGetGLInternalFormatFromPixelFormat(): unknown OF pixel format "
@@ -743,16 +743,16 @@ int ofGetBytesPerChannelFromGLType(int glType){
 		case GL_FLOAT:
 			return 4;
 #endif
-		case GL_UNSIGNED_INT_24_8:
-			 return 4;
+//		case GL_UNSIGNED_INT_24_8:
+//			 return 4;
 
 
 #ifndef TARGET_OPENGLES
 		case GL_UNSIGNED_INT:
 			return 4;
 #endif
-		case GL_HALF_FLOAT:
-			return 2;
+//		case GL_HALF_FLOAT:
+//			return 2;
 
 		default:
 			ofLogError("ofGetBytesPerChannelFromGLType") << "unknown type returning 1";
@@ -784,62 +784,63 @@ void ofSetPixelStoreiAlignment(GLenum pname, int stride){
 }
 
 vector<string> ofGLSupportedExtensions(){
-#ifdef TARGET_OPENGLES
-	char* extensions = (char*)glGetString(GL_EXTENSIONS);
-	if(extensions){
-		string extensions_str = extensions;
-		return ofSplitString(extensions_str," ");
-	}else{
+//#ifdef TARGET_OPENGLES
+//	char* extensions = (char*)glGetString(GL_EXTENSIONS);
+//	if(extensions){
+//		string extensions_str = extensions;
+//		return ofSplitString(extensions_str," ");
+//	}else{
 		return vector<string>();
-	}
-#else
-	int numExtensions=0;
-	glGetIntegerv(GL_NUM_EXTENSIONS, &numExtensions);
-	std::vector<std::string> extensions;
-	for(int i=0;i<numExtensions;i++){
-		char* extension = (char*)glGetStringi(GL_EXTENSIONS, i);
-		if(extension){
-			extensions.emplace_back(extension);
-		}
-	}
-	return extensions;
-#endif
+//	}
+//#else
+//	int numExtensions=0;
+//	glGetIntegerv(GL_NUM_EXTENSIONS, &numExtensions);
+//	std::vector<std::string> extensions;
+//	for(int i=0;i<numExtensions;i++){
+//		char* extension = (char*)glGetStringi(GL_EXTENSIONS, i);
+//		if(extension){
+//			extensions.emplace_back(extension);
+//		}
+//	}
+//	return extensions;
+//#endif
 }
 
 bool ofGLCheckExtension(string searchName){
-#if defined( TARGET_OPENGLES )
-	vector<string> extensionsList = ofGLSupportedExtensions();
-	std::set<string> extensionsSet;
-	extensionsSet.insert(extensionsList.begin(),extensionsList.end());
-	return extensionsSet.find(searchName)!=extensionsSet.end();
-#else
-	return glewIsSupported(searchName.c_str());
-#endif
+//#if defined( TARGET_OPENGLES )
+//	vector<string> extensionsList = ofGLSupportedExtensions();
+//	std::set<string> extensionsSet;
+//	extensionsSet.insert(extensionsList.begin(),extensionsList.end());
+//	return extensionsSet.find(searchName)!=extensionsSet.end();
+//#else
+//	return glewIsSupported(searchName.c_str());
+//#endif
+	return false;
 }
 
 bool ofGLSupportsNPOTTextures(){
-#ifndef TARGET_OPENGLES
-	return GL_ARB_texture_rectangle;
-#elif !defined(TARGET_EMSCRIPTEN)
-	static bool npotChecked = false;
-	static bool npotSupported = false;
-	if(!npotChecked){
-		vector<string> extensionsList = ofGLSupportedExtensions();
-		std::set<string> extensionsSet;
-		extensionsSet.insert(extensionsList.begin(),extensionsList.end());
-
-		npotSupported = extensionsSet.find("GL_OES_texture_npot")!=extensionsSet.end() ||
-				extensionsSet.find("APPLE_texture_2D_limited_npot")!=extensionsSet.end() ||
-				extensionsSet.find("GL_NV_texture_npot_2D_mipmap")!=extensionsSet.end() ||
-				extensionsSet.find("GL_IMG_texture_npot")!=extensionsSet.end() ||
-				extensionsSet.find("GL_ARB_texture_non_power_of_two")!=extensionsSet.end();
-		npotChecked = true;
-	}
-
-	return npotSupported;
-#else
+//#ifndef TARGET_OPENGLES
+//	return GL_ARB_texture_rectangle;
+//#elif !defined(TARGET_EMSCRIPTEN)
+//	static bool npotChecked = false;
+//	static bool npotSupported = false;
+//	if(!npotChecked){
+//		vector<string> extensionsList = ofGLSupportedExtensions();
+//		std::set<string> extensionsSet;
+//		extensionsSet.insert(extensionsList.begin(),extensionsList.end());
+//
+//		npotSupported = extensionsSet.find("GL_OES_texture_npot")!=extensionsSet.end() ||
+//				extensionsSet.find("APPLE_texture_2D_limited_npot")!=extensionsSet.end() ||
+//				extensionsSet.find("GL_NV_texture_npot_2D_mipmap")!=extensionsSet.end() ||
+//				extensionsSet.find("GL_IMG_texture_npot")!=extensionsSet.end() ||
+//				extensionsSet.find("GL_ARB_texture_non_power_of_two")!=extensionsSet.end();
+//		npotChecked = true;
+//	}
+//
+//	return npotSupported;
+//#else
 	return true;
-#endif
+//#endif
 }
 
 string ofGLSLVersionFromGL(int major, int minor){

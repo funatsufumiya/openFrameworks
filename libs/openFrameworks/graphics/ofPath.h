@@ -331,7 +331,7 @@ public:
 
 	void tessellate();
 
-	const ofMesh & getTessellation() const;
+	// const ofMesh & getTessellation() const;
 
 	void simplify(float tolerance=0.3f);
 
@@ -432,11 +432,11 @@ private:
 	std::vector<ofPolyline>  polylines;
 	std::vector<ofPolyline>  tessellatedContour; // if winding mode != ODD
 
-#ifdef TARGET_OPENGLES
-	ofMesh				cachedTessellation;
-#else
-	ofVboMesh			cachedTessellation;
-#endif
+//#ifdef TARGET_OPENGLES
+//	ofMesh				cachedTessellation;
+//#else
+//	ofVboMesh			cachedTessellation;
+//#endif
 #if defined(TARGET_EMSCRIPTEN)
 	static ofTessellator tessellator;
 #elif HAS_TLS

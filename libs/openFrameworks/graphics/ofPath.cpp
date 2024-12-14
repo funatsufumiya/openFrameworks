@@ -75,7 +75,7 @@ void ofPath::clear(){
 	// let one polyline and clear it: avoids instantiation
 	polylines.resize(1);
 	polylines[0].clear();
-	cachedTessellation.clear();
+//	cachedTessellation.clear();
 	flagShapeChanged();
 }
 
@@ -643,7 +643,7 @@ void ofPath::tessellate(){
 	generatePolylinesFromCommands();
 	if(!bNeedsTessellation || polylines.empty() || std::all_of(polylines.begin(), polylines.end(), [](const ofPolyline & p) {return p.getVertices().empty();})) return;
 	if(bFill){
-		tessellator.tessellateToMesh( polylines, windingMode, cachedTessellation);
+//		tessellator.tessellateToMesh( polylines, windingMode, cachedTessellation);
 	}
 	if(hasOutline() && windingMode!=OF_POLY_WINDING_ODD){
 		tessellator.tessellateToPolylines( polylines, windingMode, tessellatedContour);
@@ -663,10 +663,11 @@ const vector<ofPolyline> & ofPath::getOutline() const{
 }
 
 //----------------------------------------------------------
-const ofMesh & ofPath::getTessellation() const{
-	const_cast<ofPath*>(this)->tessellate();
-	return cachedTessellation;
-}
+//const ofMesh & ofPath::getTessellation() const{
+////	const_cast<ofPath*>(this)->tessellate();
+////	return cachedTessellation;
+//	return ofMesh();
+//}
 
 //----------------------------------------------------------
 void ofPath::draw(float x, float y) const{

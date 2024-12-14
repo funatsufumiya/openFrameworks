@@ -1,8 +1,8 @@
 #include "ofAppGLFWWindow.h"
 
 #if defined(TARGET_GLFW_WINDOW)
-#include "ofGLProgrammableRenderer.h"
-#include "ofGLRenderer.h"
+//#include "ofGLProgrammableRenderer.h"
+#include "ofPGLRenderer.h"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -359,30 +359,30 @@ void ofAppGLFWWindow::setup(const ofGLESWindowSettings & settings) {
         }
         
 #ifndef TARGET_OPENGLES
-        static bool inited = false;
-        if (!inited) {
-            glewExperimental = GL_TRUE;
-            GLenum err = glewInit();
-            if (GLEW_OK != err) {
-                /* Problem: glewInit failed, something is seriously wrong. */
-                ofLogError("ofAppRunner") << "couldn't init GLEW: " << glewGetErrorString(err);
-                return;
-            }
-            inited = true;
-        }
+//        static bool inited = false;
+//        if (!inited) {
+//            glewExperimental = GL_TRUE;
+//            GLenum err = glewInit();
+//            if (GLEW_OK != err) {
+//                /* Problem: glewInit failed, something is seriously wrong. */
+//                ofLogError("ofAppRunner") << "couldn't init GLEW: " << glewGetErrorString(err);
+//                return;
+//            }
+//            inited = true;
+//        }
 #endif
         
         ofLogVerbose() << "GL Version: " << glGetString(GL_VERSION);
         
-        if (currentRenderer->getType() == ofGLProgrammableRenderer::TYPE) {
-#ifndef TARGET_OPENGLES
-            static_cast<ofGLProgrammableRenderer *>(currentRenderer.get())->setup(settings.glVersionMajor, settings.glVersionMinor);
-#else
-            static_cast<ofGLProgrammableRenderer *>(currentRenderer.get())->setup(settings.glesVersion, 0);
-#endif
-        } else {
-            static_cast<ofGLRenderer *>(currentRenderer.get())->setup();
-        }
+//        if (currentRenderer->getType() == ofGLProgrammableRenderer::TYPE) {
+//#ifndef TARGET_OPENGLES
+//            static_cast<ofGLProgrammableRenderer *>(currentRenderer.get())->setup(settings.glVersionMajor, settings.glVersionMinor);
+//#else
+//            static_cast<ofGLProgrammableRenderer *>(currentRenderer.get())->setup(settings.glesVersion, 0);
+//#endif
+//        } else {
+            static_cast<ofPGLRenderer *>(currentRenderer.get())->setup();
+//        }
         
         setVerticalSync(true);
         glfwSetMouseButtonCallback(windowP, mouse_cb);

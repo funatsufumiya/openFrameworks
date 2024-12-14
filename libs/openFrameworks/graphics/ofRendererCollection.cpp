@@ -6,8 +6,8 @@
  */
 
 #include "ofRendererCollection.h"
-#include "ofGLRenderer.h"
-#include "ofGLProgrammableRenderer.h"
+#include "ofPGLRenderer.h"
+//#include "ofGLProgrammableRenderer.h"
 
 const std::string ofRendererCollection::TYPE="collection";
 
@@ -17,11 +17,11 @@ std::shared_ptr<ofBaseGLRenderer> ofRendererCollection::getGLRenderer(){
 			 return std::dynamic_pointer_cast<ofBaseGLRenderer>(renderer);
 		 }
    }
-   #ifndef TARGET_PROGRAMMABLE_GL
-		return std::shared_ptr<ofGLRenderer>();
-   #else
-		return std::shared_ptr<ofGLProgrammableRenderer>();
-   #endif
+//   #ifndef TARGET_PROGRAMMABLE_GL
+		return std::shared_ptr<ofPGLRenderer>();
+//   #else
+//		return std::shared_ptr<ofGLProgrammableRenderer>();
+//   #endif
 }
 
 bool ofRendererCollection::rendersPathPrimitives(){return true;}

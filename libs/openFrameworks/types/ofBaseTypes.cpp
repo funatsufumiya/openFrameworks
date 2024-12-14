@@ -343,7 +343,7 @@ void ofBaseRenderer::drawRotationAxes(float radius, float stripWidth, int circle
 }
 
 void ofBaseMaterial::uploadMatrices(const ofShader & shader,ofGLProgrammableRenderer & renderer) const{
-	shader.setUniformMatrix4f("normalMatrix", renderer.getCurrentNormalMatrix());
+//	shader.setUniformMatrix4f("normalMatrix", renderer.getCurrentNormalMatrix());
 }
 
 bool ofBaseMaterial::isBound() const {
