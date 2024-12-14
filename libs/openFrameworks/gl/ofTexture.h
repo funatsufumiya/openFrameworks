@@ -595,7 +595,7 @@ class ofTexture : public ofBaseDraws {
 	/// \param y Upper left corner vertical screen position.
 	/// \param w Width of the area to copy in pixels.
 	/// \param h Height of the area to copy in pixels.
-	void loadScreenData(int x, int y, int w, int h);
+	// void loadScreenData(int x, int y, int w, int h);
 	
 	using ofBaseDraws::draw;
 	

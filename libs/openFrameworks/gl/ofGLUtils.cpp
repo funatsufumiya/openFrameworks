@@ -58,14 +58,14 @@ int ofGetGLInternalFormat(const ofPixels& pixels) {
 int ofGetGLInternalFormat(const ofShortPixels& pixels) {
 #ifndef TARGET_OPENGLES
 	switch(pixels.getNumChannels()) {
-		case 3: return GL_RGB16;
-		case 4: return GL_RGBA16;
-		case 2:
-			if(ofIsGLProgrammableRenderer()){
-				return GL_RG16;
-			}else{
-				return GL_LUMINANCE16_ALPHA16;
-			}
+//		case 3: return GL_RGB16;
+//		case 4: return GL_RGBA16;
+//		case 2:
+//			if(ofIsGLProgrammableRenderer()){
+//				return GL_RG16;
+//			}else{
+//				return GL_LUMINANCE16_ALPHA16;
+//			}
 		default:
 			if(ofIsGLProgrammableRenderer()){
 				return GL_R16;

@@ -119,7 +119,7 @@ public:
 
 	bool setup(const ofShaderSettings & settings);
 #if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-	bool setup(const TransformFeedbackSettings & settings);
+	// bool setup(const TransformFeedbackSettings & settings);
 #endif
 
 	// these are essential to call before linking the program with geometry shaders
@@ -138,16 +138,16 @@ public:
 	void end() const;
 
 #if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-	void beginTransformFeedback(GLenum mode) const;
-	void beginTransformFeedback(GLenum mode, const TransformFeedbackRangeBinding & binding) const;
-	void beginTransformFeedback(GLenum mode, const std::vector<TransformFeedbackRangeBinding> & binding) const;
-	void beginTransformFeedback(GLenum mode, const TransformFeedbackBaseBinding & binding) const;
-	void beginTransformFeedback(GLenum mode, const std::vector<TransformFeedbackBaseBinding> & binding) const;
-	void endTransformFeedback() const;
-	void endTransformFeedback(const TransformFeedbackRangeBinding & binding) const;
-	void endTransformFeedback(const std::vector<TransformFeedbackRangeBinding> & binding) const;
-	void endTransformFeedback(const TransformFeedbackBaseBinding & binding) const;
-	void endTransformFeedback(const std::vector<TransformFeedbackBaseBinding> & binding) const;
+	// void beginTransformFeedback(GLenum mode) const;
+	// void beginTransformFeedback(GLenum mode, const TransformFeedbackRangeBinding & binding) const;
+	// void beginTransformFeedback(GLenum mode, const std::vector<TransformFeedbackRangeBinding> & binding) const;
+	// void beginTransformFeedback(GLenum mode, const TransformFeedbackBaseBinding & binding) const;
+	// void beginTransformFeedback(GLenum mode, const std::vector<TransformFeedbackBaseBinding> & binding) const;
+	// void endTransformFeedback() const;
+	// void endTransformFeedback(const TransformFeedbackRangeBinding & binding) const;
+	// void endTransformFeedback(const std::vector<TransformFeedbackRangeBinding> & binding) const;
+	// void endTransformFeedback(const TransformFeedbackBaseBinding & binding) const;
+	// void endTransformFeedback(const std::vector<TransformFeedbackBaseBinding> & binding) const;
 #endif
 
 #if !defined(TARGET_OPENGLES) && defined(glDispatchCompute)
@@ -208,10 +208,10 @@ public:
 #endif
 
 #ifndef TARGET_OPENGLES
-	void setAttribute1s(GLint location, short v1) const;
-	void setAttribute2s(GLint location, short v1, short v2) const;
-	void setAttribute3s(GLint location, short v1, short v2, short v3) const;
-	void setAttribute4s(GLint location, short v1, short v2, short v3, short v4) const;
+	// void setAttribute1s(GLint location, short v1) const;
+	// void setAttribute2s(GLint location, short v1, short v2) const;
+	// void setAttribute3s(GLint location, short v1, short v2, short v3) const;
+	// void setAttribute4s(GLint location, short v1, short v2, short v3, short v4) const;
 #endif
 
 	void setAttribute1f(GLint location, float v1) const;
@@ -220,10 +220,10 @@ public:
 	void setAttribute4f(GLint location, float v1, float v2, float v3, float v4) const;
 
 #ifndef TARGET_OPENGLES
-	void setAttribute1d(GLint location, double v1) const;
-	void setAttribute2d(GLint location, double v1, double v2) const;
-	void setAttribute3d(GLint location, double v1, double v2, double v3) const;
-	void setAttribute4d(GLint location, double v1, double v2, double v3, double v4) const;
+	// void setAttribute1d(GLint location, double v1) const;
+	// void setAttribute2d(GLint location, double v1, double v2) const;
+	// void setAttribute3d(GLint location, double v1, double v2, double v3) const;
+	// void setAttribute4d(GLint location, double v1, double v2, double v3, double v4) const;
 #endif
 
 	void setAttribute1fv(const std::string & name, const float* v, GLsizei stride=sizeof(float)) const;

@@ -871,10 +871,10 @@ void ofVbo::bind() const{
 			if(!programmable){
 				positionAttribute.bind();
 				#ifndef TARGET_PROGRAMMABLE_GL
-				glEnableClientState(GL_VERTEX_ARRAY);
-				glVertexPointer(positionAttribute.numCoords, GL_FLOAT,
-								positionAttribute.stride,
-								(void*)positionAttribute.offset);
+//				glEnableClientState(GL_VERTEX_ARRAY);
+//				glVertexPointer(positionAttribute.numCoords, GL_FLOAT,
+//								positionAttribute.stride,
+//								(void*)positionAttribute.offset);
 				#endif
 			}else{
 				positionAttribute.enable();
@@ -887,10 +887,10 @@ void ofVbo::bind() const{
 			if(!programmable){
 				colorAttribute.bind();
 				#ifndef TARGET_PROGRAMMABLE_GL
-				glEnableClientState(GL_COLOR_ARRAY);
-				glColorPointer(colorAttribute.numCoords, GL_FLOAT,
-						colorAttribute.stride,
-							   (void*)colorAttribute.offset);
+//				glEnableClientState(GL_COLOR_ARRAY);
+//				glColorPointer(colorAttribute.numCoords, GL_FLOAT,
+//						colorAttribute.stride,
+//							   (void*)colorAttribute.offset);
 				#endif
 			}else{
 				colorAttribute.enable();
@@ -903,9 +903,9 @@ void ofVbo::bind() const{
 			if(!programmable){
 				normalAttribute.bind();
 				#ifndef TARGET_PROGRAMMABLE_GL
-				glEnableClientState(GL_NORMAL_ARRAY);
-				glNormalPointer(GL_FLOAT, normalAttribute.stride,
-								(void*)normalAttribute.offset);
+//				glEnableClientState(GL_NORMAL_ARRAY);
+//				glNormalPointer(GL_FLOAT, normalAttribute.stride,
+//								(void*)normalAttribute.offset);
 				#endif
 			}else{
 				normalAttribute.enable();
@@ -918,10 +918,10 @@ void ofVbo::bind() const{
 			if(!programmable){
 				texCoordAttribute.bind();
 				#ifndef TARGET_PROGRAMMABLE_GL
-				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-				glTexCoordPointer(texCoordAttribute.numCoords,
-								  GL_FLOAT, texCoordAttribute.stride,
-								  (void*)texCoordAttribute.offset);
+//				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+//				glTexCoordPointer(texCoordAttribute.numCoords,
+//								  GL_FLOAT, texCoordAttribute.stride,
+//								  (void*)texCoordAttribute.offset);
 				#endif
 			}else{
 				texCoordAttribute.enable();
@@ -952,15 +952,15 @@ void ofVbo::unbind() const{
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	if(!ofIsGLProgrammableRenderer()){
 		#ifndef TARGET_PROGRAMMABLE_GL
-		if(bUsingColors){
-			glDisableClientState(GL_COLOR_ARRAY);
-		}
-		if(bUsingNormals){
-			glDisableClientState(GL_NORMAL_ARRAY);
-		}
-		if(bUsingTexCoords){
-			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		}
+//		if(bUsingColors){
+//			glDisableClientState(GL_COLOR_ARRAY);
+//		}
+//		if(bUsingNormals){
+//			glDisableClientState(GL_NORMAL_ARRAY);
+//		}
+//		if(bUsingTexCoords){
+//			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+//		}
 		#endif
 	}
 }

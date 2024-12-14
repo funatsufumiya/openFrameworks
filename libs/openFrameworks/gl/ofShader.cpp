@@ -204,7 +204,7 @@ bool ofShader::load(const of::filesystem::path & vertName, const of::filesystem:
     if (vertName.empty() == false) setupShaderFromFile(GL_VERTEX_SHADER, vertName);
     if (fragName.empty() == false) setupShaderFromFile(GL_FRAGMENT_SHADER, fragName);
 #ifndef TARGET_OPENGLES
-    if (geomName.empty() == false) setupShaderFromFile(GL_GEOMETRY_SHADER_EXT, geomName);
+//    if (geomName.empty() == false) setupShaderFromFile(GL_GEOMETRY_SHADER_EXT, geomName);
 #endif
     if (ofIsGLProgrammableRenderer()) {
         bindDefaults();
@@ -251,43 +251,43 @@ bool ofShader::setup(const ofShaderSettings & settings) {
 }
 
 #if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-//--------------------------------------------------------------
-bool ofShader::setup(const TransformFeedbackSettings & settings) {
-    for (auto shader : settings.shaderFiles) {
-        auto ty = shader.first;
-        auto file = shader.second;
-        auto shaderSource = sourceFromFile(ty, file);
-        shaderSource.intDefines = settings.intDefines;
-        shaderSource.floatDefines = settings.floatDefines;
-        if (!setupShaderFromSource(std::move(shaderSource))) {
-            return false;
-        }
-    }
-
-    for (auto shader : settings.shaderSources) {
-        auto ty = shader.first;
-        auto source = shader.second;
-        Source shaderSource { ty, source, settings.sourceDirectoryPath };
-        shaderSource.intDefines = settings.intDefines;
-        shaderSource.floatDefines = settings.floatDefines;
-        if (!setupShaderFromSource(std::move(shaderSource))) {
-            return false;
-        }
-    }
-
-    if (ofIsGLProgrammableRenderer() && settings.bindDefaults) {
-        bindDefaults();
-    }
-
-    if (!settings.varyingsToCapture.empty()) {
-        std::vector<const char *> varyings(settings.varyingsToCapture.size());
-        std::transform(settings.varyingsToCapture.begin(), settings.varyingsToCapture.end(), varyings.begin(), [](const std::string & str) {
-            return str.c_str();
-        });
-        glTransformFeedbackVaryings(getProgram(), varyings.size(), varyings.data(), settings.bufferMode);
-    }
-    return linkProgram();
-}
+////--------------------------------------------------------------
+//bool ofShader::setup(const TransformFeedbackSettings & settings) {
+//    for (auto shader : settings.shaderFiles) {
+//        auto ty = shader.first;
+//        auto file = shader.second;
+//        auto shaderSource = sourceFromFile(ty, file);
+//        shaderSource.intDefines = settings.intDefines;
+//        shaderSource.floatDefines = settings.floatDefines;
+//        if (!setupShaderFromSource(std::move(shaderSource))) {
+//            return false;
+//        }
+//    }
+//
+//    for (auto shader : settings.shaderSources) {
+//        auto ty = shader.first;
+//        auto source = shader.second;
+//        Source shaderSource { ty, source, settings.sourceDirectoryPath };
+//        shaderSource.intDefines = settings.intDefines;
+//        shaderSource.floatDefines = settings.floatDefines;
+//        if (!setupShaderFromSource(std::move(shaderSource))) {
+//            return false;
+//        }
+//    }
+//
+//    if (ofIsGLProgrammableRenderer() && settings.bindDefaults) {
+//        bindDefaults();
+//    }
+//
+//    if (!settings.varyingsToCapture.empty()) {
+//        std::vector<const char *> varyings(settings.varyingsToCapture.size());
+//        std::transform(settings.varyingsToCapture.begin(), settings.varyingsToCapture.end(), varyings.begin(), [](const std::string & str) {
+//            return str.c_str();
+//        });
+//        glTransformFeedbackVaryings(getProgram(), varyings.size(), varyings.data(), settings.bufferMode);
+//    }
+//    return linkProgram();
+//}
 #endif
 
 //--------------------------------------------------------------
@@ -534,36 +534,37 @@ string ofShader::getShaderSource(GLenum type) const {
 //--------------------------------------------------------------
 void ofShader::setGeometryInputType(GLenum type) {
 #ifndef TARGET_OPENGLES
-    checkAndCreateProgram();
-    glProgramParameteri(program, GL_GEOMETRY_INPUT_TYPE_EXT, type);
+//    checkAndCreateProgram();
+//    glProgramParameteri(program, GL_GEOMETRY_INPUT_TYPE_EXT, type);
 #endif
 }
 
 //--------------------------------------------------------------
 void ofShader::setGeometryOutputType(GLenum type) {
 #ifndef TARGET_OPENGLES
-    checkAndCreateProgram();
-    glProgramParameteri(program, GL_GEOMETRY_OUTPUT_TYPE_EXT, type);
+//    checkAndCreateProgram();
+//    glProgramParameteri(program, GL_GEOMETRY_OUTPUT_TYPE_EXT, type);
 #endif
 }
 
 //--------------------------------------------------------------
 void ofShader::setGeometryOutputCount(int count) {
 #ifndef TARGET_OPENGLES
-    checkAndCreateProgram();
-    glProgramParameteri(program, GL_GEOMETRY_VERTICES_OUT_EXT, count);
+//    checkAndCreateProgram();
+//    glProgramParameteri(program, GL_GEOMETRY_VERTICES_OUT_EXT, count);
 #endif
 }
 
 //--------------------------------------------------------------
 int ofShader::getGeometryMaxOutputCount() const {
 #ifndef TARGET_OPENGLES
-    int temp;
-    glGetIntegerv(GL_MAX_GEOMETRY_OUTPUT_VERTICES_EXT, &temp);
-    return temp;
+//    int temp;
+//    glGetIntegerv(GL_MAX_GEOMETRY_OUTPUT_VERTICES_EXT, &temp);
+//    return temp;
 #else
-    return 0;
+//    return 0;
 #endif
+	return 0;
 }
 
 //--------------------------------------------------------------
@@ -651,10 +652,11 @@ void ofShader::checkProgramInfoLog() {
 //--------------------------------------------------------------
 void ofShader::checkAndCreateProgram() {
 #ifndef TARGET_OPENGLES
-    if (GL_ARB_shader_objects) {
+//    if (GL_ARB_shader_objects) {
 #else
-    if (ofIsGLProgrammableRenderer()) {
+//    if (ofIsGLProgrammableRenderer()) {
 #endif
+	if (false) {
         if (program == 0) {
             ofLogVerbose("ofShader") << "checkAndCreateProgram(): creating GLSL program";
             program = glCreateProgram();
@@ -851,75 +853,75 @@ void ofShader::end() const {
 }
 
 #if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-//--------------------------------------------------------------
-void ofShader::beginTransformFeedback(GLenum mode) const {
-    begin();
-    glEnable(GL_RASTERIZER_DISCARD);
-    glBeginTransformFeedback(mode);
-}
-
-//--------------------------------------------------------------
-void ofShader::beginTransformFeedback(GLenum mode, const TransformFeedbackRangeBinding & binding) const {
-    binding.buffer.bindRange(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index, binding.offset, binding.size);
-    beginTransformFeedback(mode);
-}
-
-//--------------------------------------------------------------
-void ofShader::beginTransformFeedback(GLenum mode, const std::vector<TransformFeedbackRangeBinding> & bindings) const {
-    for (auto & binding : bindings) {
-        binding.buffer.bindRange(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index, binding.offset, binding.size);
-    }
-    beginTransformFeedback(mode);
-}
-
-//--------------------------------------------------------------
-void ofShader::beginTransformFeedback(GLenum mode, const TransformFeedbackBaseBinding & binding) const {
-    binding.buffer.bindBase(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index);
-    beginTransformFeedback(mode);
-}
-
-//--------------------------------------------------------------
-void ofShader::beginTransformFeedback(GLenum mode, const std::vector<TransformFeedbackBaseBinding> & bindings) const {
-    for (auto & binding : bindings) {
-        binding.buffer.bindBase(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index);
-    }
-    beginTransformFeedback(mode);
-}
-
-//--------------------------------------------------------------
-void ofShader::endTransformFeedback() const {
-    glEndTransformFeedback();
-    glDisable(GL_RASTERIZER_DISCARD);
-    end();
-}
-
-//--------------------------------------------------------------
-void ofShader::endTransformFeedback(const TransformFeedbackRangeBinding & binding) const {
-    binding.buffer.unbindRange(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index);
-    endTransformFeedback();
-}
-
-//--------------------------------------------------------------
-void ofShader::endTransformFeedback(const std::vector<TransformFeedbackRangeBinding> & bindings) const {
-    for (auto & binding : bindings) {
-        binding.buffer.unbindRange(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index);
-    }
-    endTransformFeedback();
-}
-
-//--------------------------------------------------------------
-void ofShader::endTransformFeedback(const TransformFeedbackBaseBinding & binding) const {
-    binding.buffer.unbindBase(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index);
-    endTransformFeedback();
-}
-
-//--------------------------------------------------------------
-void ofShader::endTransformFeedback(const std::vector<TransformFeedbackBaseBinding> & bindings) const {
-    for (auto & binding : bindings) {
-        binding.buffer.unbindBase(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index);
-    }
-    endTransformFeedback();
-}
+////--------------------------------------------------------------
+//void ofShader::beginTransformFeedback(GLenum mode) const {
+//    begin();
+//    glEnable(GL_RASTERIZER_DISCARD);
+//    glBeginTransformFeedback(mode);
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::beginTransformFeedback(GLenum mode, const TransformFeedbackRangeBinding & binding) const {
+//    binding.buffer.bindRange(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index, binding.offset, binding.size);
+//    beginTransformFeedback(mode);
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::beginTransformFeedback(GLenum mode, const std::vector<TransformFeedbackRangeBinding> & bindings) const {
+//    for (auto & binding : bindings) {
+//        binding.buffer.bindRange(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index, binding.offset, binding.size);
+//    }
+//    beginTransformFeedback(mode);
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::beginTransformFeedback(GLenum mode, const TransformFeedbackBaseBinding & binding) const {
+//    binding.buffer.bindBase(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index);
+//    beginTransformFeedback(mode);
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::beginTransformFeedback(GLenum mode, const std::vector<TransformFeedbackBaseBinding> & bindings) const {
+//    for (auto & binding : bindings) {
+//        binding.buffer.bindBase(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index);
+//    }
+//    beginTransformFeedback(mode);
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::endTransformFeedback() const {
+//    glEndTransformFeedback();
+//    glDisable(GL_RASTERIZER_DISCARD);
+//    end();
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::endTransformFeedback(const TransformFeedbackRangeBinding & binding) const {
+//    binding.buffer.unbindRange(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index);
+//    endTransformFeedback();
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::endTransformFeedback(const std::vector<TransformFeedbackRangeBinding> & bindings) const {
+//    for (auto & binding : bindings) {
+//        binding.buffer.unbindRange(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index);
+//    }
+//    endTransformFeedback();
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::endTransformFeedback(const TransformFeedbackBaseBinding & binding) const {
+//    binding.buffer.unbindBase(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index);
+//    endTransformFeedback();
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::endTransformFeedback(const std::vector<TransformFeedbackBaseBinding> & bindings) const {
+//    for (auto & binding : bindings) {
+//        binding.buffer.unbindBase(GL_TRANSFORM_FEEDBACK_BUFFER, binding.index);
+//    }
+//    endTransformFeedback();
+//}
 #endif
 
 #if !defined(TARGET_OPENGLES) && defined(glDispatchCompute)
@@ -968,17 +970,17 @@ void ofShader::setUniformTexture(const string & name, const ofTextureData & texD
             glEnable(texData.textureTarget);
             glBindTexture(texData.textureTarget, texData.textureID);
 #ifndef TARGET_OPENGLES
-            if (texData.bufferId != 0) {
-                glTexBuffer(GL_TEXTURE_BUFFER, texData.glInternalFormat, texData.bufferId);
-            }
+//            if (texData.bufferId != 0) {
+//                glTexBuffer(GL_TEXTURE_BUFFER, texData.glInternalFormat, texData.bufferId);
+//            }
 #endif
             glDisable(texData.textureTarget);
         } else {
             glBindTexture(texData.textureTarget, texData.textureID);
 #ifndef TARGET_OPENGLES
-            if (texData.bufferId != 0) {
-                glTexBuffer(GL_TEXTURE_BUFFER, texData.glInternalFormat, texData.bufferId);
-            }
+//            if (texData.bufferId != 0) {
+//                glTexBuffer(GL_TEXTURE_BUFFER, texData.glInternalFormat, texData.bufferId);
+//            }
 #endif
         }
         setUniform1i(name, textureLocation);
@@ -1176,29 +1178,29 @@ void ofShader::setUniformMatrix4f(const string & name, const glm::mat4 & m, int 
 }
 
 #ifndef TARGET_OPENGLES
-//--------------------------------------------------------------
-void ofShader::setAttribute1s(GLint location, short v1) const {
-    if (bLoaded)
-        glVertexAttrib1s(location, v1);
-}
-
-//--------------------------------------------------------------
-void ofShader::setAttribute2s(GLint location, short v1, short v2) const {
-    if (bLoaded)
-        glVertexAttrib2s(location, v1, v2);
-}
-
-//--------------------------------------------------------------
-void ofShader::setAttribute3s(GLint location, short v1, short v2, short v3) const {
-    if (bLoaded)
-        glVertexAttrib3s(location, v1, v2, v3);
-}
-
-//--------------------------------------------------------------
-void ofShader::setAttribute4s(GLint location, short v1, short v2, short v3, short v4) const {
-    if (bLoaded)
-        glVertexAttrib4s(location, v1, v2, v3, v4);
-}
+////--------------------------------------------------------------
+//void ofShader::setAttribute1s(GLint location, short v1) const {
+//    if (bLoaded)
+//        glVertexAttrib1s(location, v1);
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::setAttribute2s(GLint location, short v1, short v2) const {
+//    if (bLoaded)
+//        glVertexAttrib2s(location, v1, v2);
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::setAttribute3s(GLint location, short v1, short v2, short v3) const {
+//    if (bLoaded)
+//        glVertexAttrib3s(location, v1, v2, v3);
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::setAttribute4s(GLint location, short v1, short v2, short v3, short v4) const {
+//    if (bLoaded)
+//        glVertexAttrib4s(location, v1, v2, v3, v4);
+//}
 #endif
 
 //--------------------------------------------------------------
@@ -1270,29 +1272,29 @@ void ofShader::setAttribute4fv(const string & name, const float * v, GLsizei str
 }
 
 #ifndef TARGET_OPENGLES
-//--------------------------------------------------------------
-void ofShader::setAttribute1d(GLint location, double v1) const {
-    if (bLoaded)
-        glVertexAttrib1d(location, v1);
-}
-
-//--------------------------------------------------------------
-void ofShader::setAttribute2d(GLint location, double v1, double v2) const {
-    if (bLoaded)
-        glVertexAttrib2d(location, v1, v2);
-}
-
-//--------------------------------------------------------------
-void ofShader::setAttribute3d(GLint location, double v1, double v2, double v3) const {
-    if (bLoaded)
-        glVertexAttrib3d(location, v1, v2, v3);
-}
-
-//--------------------------------------------------------------
-void ofShader::setAttribute4d(GLint location, double v1, double v2, double v3, double v4) const {
-    if (bLoaded)
-        glVertexAttrib4d(location, v1, v2, v3, v4);
-}
+////--------------------------------------------------------------
+//void ofShader::setAttribute1d(GLint location, double v1) const {
+//    if (bLoaded)
+//        glVertexAttrib1d(location, v1);
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::setAttribute2d(GLint location, double v1, double v2) const {
+//    if (bLoaded)
+//        glVertexAttrib2d(location, v1, v2);
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::setAttribute3d(GLint location, double v1, double v2, double v3) const {
+//    if (bLoaded)
+//        glVertexAttrib3d(location, v1, v2, v3);
+//}
+//
+////--------------------------------------------------------------
+//void ofShader::setAttribute4d(GLint location, double v1, double v2, double v3, double v4) const {
+//    if (bLoaded)
+//        glVertexAttrib4d(location, v1, v2, v3, v4);
+//}
 #endif
 
 //--------------------------------------------------------------

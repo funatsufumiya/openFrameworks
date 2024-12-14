@@ -96,42 +96,42 @@ public:
     }
 
 #ifndef TARGET_OPENGLES
-	/// glMapNamedBuffer: https://www.opengl.org/sdk/docs/man4/html/glMapBuffer.xhtml
-	/// before GL 4.5 emulates glMapNamedBuffer by binding to last known target
-	/// for this buffer and mapping that target
-	void * map(GLenum access);
+	// /// glMapNamedBuffer: https://www.opengl.org/sdk/docs/man4/html/glMapBuffer.xhtml
+	// /// before GL 4.5 emulates glMapNamedBuffer by binding to last known target
+	// /// for this buffer and mapping that target
+	// void * map(GLenum access);
 
-	/// glUnmapNamedBuffer: https://www.opengl.org/sdk/docs/man4/html/glUnmapBuffer.xhtml
-	/// before GL 4.5 emulates glUnmapNamedBuffer by unmapping and unbinding
-	/// the last known target for this buffer
-	void unmap();
+	// /// glUnmapNamedBuffer: https://www.opengl.org/sdk/docs/man4/html/glUnmapBuffer.xhtml
+	// /// before GL 4.5 emulates glUnmapNamedBuffer by unmapping and unbinding
+	// /// the last known target for this buffer
+	// void unmap();
 
-	/// typed version of map, returns an array of T when used like:
-	/// buffer.map<Type>(access)
-	template<typename T>
-	T * map(GLenum access){
-		return static_cast<T*>(map(access));
-	}
+	// /// typed version of map, returns an array of T when used like:
+	// /// buffer.map<Type>(access)
+	// template<typename T>
+	// T * map(GLenum access){
+	// 	return static_cast<T*>(map(access));
+	// }
 
-	/// glMapNamedBufferRange: https://www.opengl.org/sdk/docs/man4/html/glMapBufferRange.xhtml
-	/// before GL 4.5 emulates glMapNamedBufferRange by binding to last known target
-	/// for this buffer and mapping that target
-	void * mapRange(GLintptr offset, GLsizeiptr length, GLenum access);
+	// /// glMapNamedBufferRange: https://www.opengl.org/sdk/docs/man4/html/glMapBufferRange.xhtml
+	// /// before GL 4.5 emulates glMapNamedBufferRange by binding to last known target
+	// /// for this buffer and mapping that target
+	// void * mapRange(GLintptr offset, GLsizeiptr length, GLenum access);
 
-	/// same as unmap, just to make the api more clear
-	void unmapRange();
+	// /// same as unmap, just to make the api more clear
+	// void unmapRange();
 
-	/// typed version of mapRange, returns an array of T when used like:
-	/// buffer.mapRange<Type>(access)
-	template<typename T>
-	T * mapRange(GLintptr offset, GLsizeiptr length, GLenum access){
-		return static_cast<T*>(mapRange(offset,length,access));
-	}
+	// /// typed version of mapRange, returns an array of T when used like:
+	// /// buffer.mapRange<Type>(access)
+	// template<typename T>
+	// T * mapRange(GLintptr offset, GLsizeiptr length, GLenum access){
+	// 	return static_cast<T*>(mapRange(offset,length,access));
+	// }
 
-	void copyTo(ofBufferObject & dstBuffer) const;
-	void copyTo(ofBufferObject & dstBuffer, int readOffset, int writeOffset, size_t size) const;
+	// void copyTo(ofBufferObject & dstBuffer) const;
+	// void copyTo(ofBufferObject & dstBuffer, int readOffset, int writeOffset, size_t size) const;
 
-    void invalidate();
+    // void invalidate();
 #endif
 
 	GLsizeiptr size() const;

@@ -154,116 +154,116 @@ void ofBufferObject::updateData(GLsizeiptr bytes, const void * data){
 }
 
 #ifndef TARGET_OPENGLES
-void * ofBufferObject::map(GLenum access){
-	if(!this->data) return nullptr;
-
-#ifdef GLEW_VERSION_4_5
-	if(this->data->isDSA) {
-		return glMapNamedBuffer(data->id,access);
-	}
-#endif
-
-	/// --------| invariant: direct state access is not available
-	if(!data->isBound){
-		// if the buffer wasn't already bound and the operation
-		// is one of unpack/pack buffer alternate between the 2
-		// since the tipical use is to pack to copy to the buffer
-		// then unpack to copy from it.
-		// for more advanced usages one can just bind the buffer
-		// before mapping
-		if(data->lastTarget==GL_PIXEL_PACK_BUFFER){
-			data->lastTarget = GL_PIXEL_UNPACK_BUFFER;
-		}else if(data->lastTarget == GL_PIXEL_UNPACK_BUFFER){
-			data->lastTarget = GL_PIXEL_PACK_BUFFER;
-		}
-		glBindBuffer(data->lastTarget, data->id);
-	}
-
-	auto ret = glMapBuffer(data->lastTarget,access);
-
-	if(!data->isBound){
-		unbind(data->lastTarget);
-	}
-
-	return ret;
-}
-
-void ofBufferObject::unmap(){
-	if(!this->data) return;
-
-#ifdef GLEW_VERSION_4_5
-	if(this->data->isDSA) {
-		glUnmapNamedBuffer(data->id);
-		return;
-	}
-#endif
-
-	/// --------| invariant: direct state access is not available
-	if(!data->isBound){
-		glBindBuffer(data->lastTarget, data->id);
-	}
-
-	glUnmapBuffer(data->lastTarget);
-
-	if(!data->isBound){
-		unbind(data->lastTarget);
-	}
-}
-
-void * ofBufferObject::mapRange(GLintptr offset, GLsizeiptr length, GLenum access){
-	if(!this->data) return nullptr;
-
-#ifdef GLEW_VERSION_4_5
-	if(this->data->isDSA) {
-		return glMapNamedBufferRange(data->id,offset,length,access);
-	}
-#endif
-
-	/// --------| invariant: direct state access is not available
-
-	bind(data->lastTarget);
-	return glMapBufferRange(data->lastTarget,offset,length,access);
-}
-
-void ofBufferObject::unmapRange(){
-	unmap();
-}
-
-void ofBufferObject::copyTo(ofBufferObject & dstBuffer) const{
-#ifdef GLEW_VERSION_4_5
-	if(this->data->isDSA) {
-		glCopyNamedBufferSubData(data->id,dstBuffer.getId(),0,0,size());
-		return;
-	}
-#endif
-
-	bind(GL_COPY_READ_BUFFER);
-	dstBuffer.bind(GL_COPY_WRITE_BUFFER);
-	glCopyBufferSubData(GL_COPY_READ_BUFFER,GL_COPY_WRITE_BUFFER,0,0,size());
-	unbind(GL_COPY_READ_BUFFER);
-	dstBuffer.unbind(GL_COPY_WRITE_BUFFER);
-}
-
-void ofBufferObject::copyTo(ofBufferObject & dstBuffer, int readOffset, int writeOffset, size_t size) const{
-#ifdef GLEW_VERSION_4_5
-	if(this->data->isDSA) {
-		glCopyNamedBufferSubData(data->id,dstBuffer.getId(),readOffset,writeOffset,size);
-		return;
-	}
-#endif
-
-	bind(GL_COPY_READ_BUFFER);
-	dstBuffer.bind(GL_COPY_WRITE_BUFFER);
-	glCopyBufferSubData(GL_COPY_READ_BUFFER,GL_COPY_WRITE_BUFFER,readOffset,writeOffset,size);
-	unbind(GL_COPY_READ_BUFFER);
-	dstBuffer.unbind(GL_COPY_WRITE_BUFFER);
-}
-
-
-
-void ofBufferObject::invalidate(){
-    glInvalidateBufferData(data->id);
-}
+//void * ofBufferObject::map(GLenum access){
+//	if(!this->data) return nullptr;
+//
+//#ifdef GLEW_VERSION_4_5
+//	if(this->data->isDSA) {
+//		return glMapNamedBuffer(data->id,access);
+//	}
+//#endif
+//
+//	/// --------| invariant: direct state access is not available
+//	if(!data->isBound){
+//		// if the buffer wasn't already bound and the operation
+//		// is one of unpack/pack buffer alternate between the 2
+//		// since the tipical use is to pack to copy to the buffer
+//		// then unpack to copy from it.
+//		// for more advanced usages one can just bind the buffer
+//		// before mapping
+//		if(data->lastTarget==GL_PIXEL_PACK_BUFFER){
+//			data->lastTarget = GL_PIXEL_UNPACK_BUFFER;
+//		}else if(data->lastTarget == GL_PIXEL_UNPACK_BUFFER){
+//			data->lastTarget = GL_PIXEL_PACK_BUFFER;
+//		}
+//		glBindBuffer(data->lastTarget, data->id);
+//	}
+//
+//	auto ret = glMapBuffer(data->lastTarget,access);
+//
+//	if(!data->isBound){
+//		unbind(data->lastTarget);
+//	}
+//
+//	return ret;
+//}
+//
+//void ofBufferObject::unmap(){
+//	if(!this->data) return;
+//
+//#ifdef GLEW_VERSION_4_5
+//	if(this->data->isDSA) {
+//		glUnmapNamedBuffer(data->id);
+//		return;
+//	}
+//#endif
+//
+//	/// --------| invariant: direct state access is not available
+//	if(!data->isBound){
+//		glBindBuffer(data->lastTarget, data->id);
+//	}
+//
+//	glUnmapBuffer(data->lastTarget);
+//
+//	if(!data->isBound){
+//		unbind(data->lastTarget);
+//	}
+//}
+//
+//void * ofBufferObject::mapRange(GLintptr offset, GLsizeiptr length, GLenum access){
+//	if(!this->data) return nullptr;
+//
+//#ifdef GLEW_VERSION_4_5
+//	if(this->data->isDSA) {
+//		return glMapNamedBufferRange(data->id,offset,length,access);
+//	}
+//#endif
+//
+//	/// --------| invariant: direct state access is not available
+//
+//	bind(data->lastTarget);
+//	return glMapBufferRange(data->lastTarget,offset,length,access);
+//}
+//
+//void ofBufferObject::unmapRange(){
+//	unmap();
+//}
+//
+//void ofBufferObject::copyTo(ofBufferObject & dstBuffer) const{
+//#ifdef GLEW_VERSION_4_5
+//	if(this->data->isDSA) {
+//		glCopyNamedBufferSubData(data->id,dstBuffer.getId(),0,0,size());
+//		return;
+//	}
+//#endif
+//
+//	bind(GL_COPY_READ_BUFFER);
+//	dstBuffer.bind(GL_COPY_WRITE_BUFFER);
+//	glCopyBufferSubData(GL_COPY_READ_BUFFER,GL_COPY_WRITE_BUFFER,0,0,size());
+//	unbind(GL_COPY_READ_BUFFER);
+//	dstBuffer.unbind(GL_COPY_WRITE_BUFFER);
+//}
+//
+//void ofBufferObject::copyTo(ofBufferObject & dstBuffer, int readOffset, int writeOffset, size_t size) const{
+//#ifdef GLEW_VERSION_4_5
+//	if(this->data->isDSA) {
+//		glCopyNamedBufferSubData(data->id,dstBuffer.getId(),readOffset,writeOffset,size);
+//		return;
+//	}
+//#endif
+//
+//	bind(GL_COPY_READ_BUFFER);
+//	dstBuffer.bind(GL_COPY_WRITE_BUFFER);
+//	glCopyBufferSubData(GL_COPY_READ_BUFFER,GL_COPY_WRITE_BUFFER,readOffset,writeOffset,size);
+//	unbind(GL_COPY_READ_BUFFER);
+//	dstBuffer.unbind(GL_COPY_WRITE_BUFFER);
+//}
+//
+//
+//
+//void ofBufferObject::invalidate(){
+//    glInvalidateBufferData(data->id);
+//}
 
 #endif
 

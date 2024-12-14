@@ -84,60 +84,60 @@ void ofGLRenderer::finishRender() {
 //----------------------------------------------------------
 void ofGLRenderer::draw(const ofMesh & vertexData, ofPolyRenderMode renderType, bool useColors, bool useTextures, bool useNormals) const {
 	if (currentStyle.smoothing) const_cast<ofGLRenderer *>(this)->startSmoothing();
-#ifndef TARGET_OPENGLES
-	glPolygonMode(GL_FRONT_AND_BACK, ofGetGLPolyMode(renderType));
-	if (vertexData.getNumVertices()) {
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(3, GL_FLOAT, sizeof(glm::vec3), &vertexData.getVerticesPointer()->x);
-	}
-	if (vertexData.getNumNormals() && useNormals) {
-		glEnableClientState(GL_NORMAL_ARRAY);
-		glNormalPointer(GL_FLOAT, sizeof(glm::vec3), &vertexData.getNormalsPointer()->x);
-	}
-	if (vertexData.getNumColors() && useColors) {
-		glEnableClientState(GL_COLOR_ARRAY);
-		glColorPointer(4, GL_FLOAT, sizeof(ofFloatColor), &vertexData.getColorsPointer()->r);
-	}
-
-	if (vertexData.getNumTexCoords() && useTextures) {
-		if (textureLocationsEnabled.size() == 0) {
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-			glTexCoordPointer(2, GL_FLOAT, sizeof(glm::vec2), &vertexData.getTexCoordsPointer()->x);
-		} else {
-			std::set<int>::iterator textureLocation = textureLocationsEnabled.begin();
-			for (; textureLocation != textureLocationsEnabled.end(); textureLocation++) {
-				glActiveTexture(GL_TEXTURE0 + *textureLocation);
-				glClientActiveTexture(GL_TEXTURE0 + *textureLocation);
-				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-				glTexCoordPointer(2, GL_FLOAT, sizeof(glm::vec2), &vertexData.getTexCoordsPointer()->x);
-			}
-			glActiveTexture(GL_TEXTURE0);
-			glClientActiveTexture(GL_TEXTURE0);
-		}
-	}
-
-	if (vertexData.getNumIndices()) {
-	// This is never executed right now but this branch of the ifdef should be used for GLES 3 so let's keep it for future uses
-	#ifdef TARGET_OPENGLES
-		glDrawElements(ofGetGLPrimitiveMode(vertexData.getMode()), vertexData.getNumIndices(), GL_UNSIGNED_SHORT, vertexData.getIndexPointer());
-	#else
-		glDrawElements(ofGetGLPrimitiveMode(vertexData.getMode()), vertexData.getNumIndices(), GL_UNSIGNED_INT, vertexData.getIndexPointer());
-	#endif
-	} else {
-		glDrawArrays(ofGetGLPrimitiveMode(vertexData.getMode()), 0, vertexData.getNumVertices());
-	}
-
-	if (vertexData.getNumColors() && useColors) {
-		glDisableClientState(GL_COLOR_ARRAY);
-	}
-	if (vertexData.getNumNormals() && useNormals) {
-		glDisableClientState(GL_NORMAL_ARRAY);
-	}
-	if (vertexData.getNumTexCoords() && useTextures) {
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	}
-	glPolygonMode(GL_FRONT_AND_BACK, currentStyle.bFill ? GL_FILL : GL_LINE);
-#else
+//#ifndef TARGET_OPENGLES
+//	glPolygonMode(GL_FRONT_AND_BACK, ofGetGLPolyMode(renderType));
+//	if (vertexData.getNumVertices()) {
+//		glEnableClientState(GL_VERTEX_ARRAY);
+//		glVertexPointer(3, GL_FLOAT, sizeof(glm::vec3), &vertexData.getVerticesPointer()->x);
+//	}
+//	if (vertexData.getNumNormals() && useNormals) {
+//		glEnableClientState(GL_NORMAL_ARRAY);
+//		glNormalPointer(GL_FLOAT, sizeof(glm::vec3), &vertexData.getNormalsPointer()->x);
+//	}
+//	if (vertexData.getNumColors() && useColors) {
+//		glEnableClientState(GL_COLOR_ARRAY);
+//		glColorPointer(4, GL_FLOAT, sizeof(ofFloatColor), &vertexData.getColorsPointer()->r);
+//	}
+//
+//	if (vertexData.getNumTexCoords() && useTextures) {
+//		if (textureLocationsEnabled.size() == 0) {
+//			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+//			glTexCoordPointer(2, GL_FLOAT, sizeof(glm::vec2), &vertexData.getTexCoordsPointer()->x);
+//		} else {
+//			std::set<int>::iterator textureLocation = textureLocationsEnabled.begin();
+//			for (; textureLocation != textureLocationsEnabled.end(); textureLocation++) {
+//				glActiveTexture(GL_TEXTURE0 + *textureLocation);
+//				glClientActiveTexture(GL_TEXTURE0 + *textureLocation);
+//				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+//				glTexCoordPointer(2, GL_FLOAT, sizeof(glm::vec2), &vertexData.getTexCoordsPointer()->x);
+//			}
+//			glActiveTexture(GL_TEXTURE0);
+//			glClientActiveTexture(GL_TEXTURE0);
+//		}
+//	}
+//
+//	if (vertexData.getNumIndices()) {
+//	// This is never executed right now but this branch of the ifdef should be used for GLES 3 so let's keep it for future uses
+//	#ifdef TARGET_OPENGLES
+//		glDrawElements(ofGetGLPrimitiveMode(vertexData.getMode()), vertexData.getNumIndices(), GL_UNSIGNED_SHORT, vertexData.getIndexPointer());
+//	#else
+//		glDrawElements(ofGetGLPrimitiveMode(vertexData.getMode()), vertexData.getNumIndices(), GL_UNSIGNED_INT, vertexData.getIndexPointer());
+//	#endif
+//	} else {
+//		glDrawArrays(ofGetGLPrimitiveMode(vertexData.getMode()), 0, vertexData.getNumVertices());
+//	}
+//
+//	if (vertexData.getNumColors() && useColors) {
+//		glDisableClientState(GL_COLOR_ARRAY);
+//	}
+//	if (vertexData.getNumNormals() && useNormals) {
+//		glDisableClientState(GL_NORMAL_ARRAY);
+//	}
+//	if (vertexData.getNumTexCoords() && useTextures) {
+//		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+//	}
+//	glPolygonMode(GL_FRONT_AND_BACK, currentStyle.bFill ? GL_FILL : GL_LINE);
+//#else
 	if (vertexData.getNumVertices()) {
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3, GL_FLOAT, sizeof(typename ofMesh::VertexType), vertexData.getVerticesPointer());
@@ -198,7 +198,7 @@ void ofGLRenderer::draw(const ofMesh & vertexData, ofPolyRenderMode renderType, 
 	if (vertexData.getNumTexCoords() && useTextures) {
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	}
-#endif
+//#endif
 	if (currentStyle.smoothing) const_cast<ofGLRenderer *>(this)->endSmoothing();
 }
 

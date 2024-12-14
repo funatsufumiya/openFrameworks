@@ -988,7 +988,7 @@ void ofShadow::_allocateFbo() {
 	if( data->lightType == OF_LIGHT_POINT ) {
 		// Create the cube map depth buffer
 		#if !defined(TARGET_OPENGLES)
-		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+//		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 		#endif
 		
 		// OES_depth_texture_cube_map
@@ -1074,11 +1074,11 @@ void ofShadow::_allocateFbo() {
 	#endif
 	
 	#ifndef TARGET_OPENGLES
-	// Disable writes to the color buffer
-	glDrawBuffer(GL_NONE);
-	
-	// Disable reads from the color buffer
-	glReadBuffer(GL_NONE);
+//	// Disable writes to the color buffer
+//	glDrawBuffer(GL_NONE);
+//	
+//	// Disable reads from the color buffer
+//	glReadBuffer(GL_NONE);
 	#endif
 	
 	gl_read_status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
@@ -1196,9 +1196,9 @@ bool ofShadow::setupShadowDepthShader(ofShader& ashader, int aLightType, const s
 	ashader.setupShaderFromSource(GL_FRAGMENT_SHADER,gversion+tdefines+depthFragShaderSource);
 
 	#ifndef TARGET_OPENGLES
-	if(bDepthCubeSinglePass) {
-		ashader.setupShaderFromSource(GL_GEOMETRY_SHADER_EXT,depthCubeGeometryShaderSource);
-	}
+//	if(bDepthCubeSinglePass) {
+//		ashader.setupShaderFromSource(GL_GEOMETRY_SHADER_EXT,depthCubeGeometryShaderSource);
+//	}
 	#endif
 
 	ashader.bindDefaults();
@@ -1225,11 +1225,11 @@ void ofShadow::initShaders(ofGLProgrammableRenderer & renderer) const{
 		shaders[&renderer]->depth.linkProgram();
 		
 		#ifndef TARGET_OPENGLES
-		shaders[&renderer]->depthCube.setupShaderFromSource(GL_VERTEX_SHADER,gversion+"#define CUBE_MAP_SINGLE_PASS\n"+vertString);
-		shaders[&renderer]->depthCube.setupShaderFromSource(GL_FRAGMENT_SHADER,gversion+"#define CUBE_MAP_SINGLE_PASS\n"+depthFragShaderSource);
-		shaders[&renderer]->depthCube.setupShaderFromSource(GL_GEOMETRY_SHADER_EXT,depthCubeGeometryShaderSource);
-		shaders[&renderer]->depthCube.bindDefaults();
-		shaders[&renderer]->depthCube.linkProgram();
+//		shaders[&renderer]->depthCube.setupShaderFromSource(GL_VERTEX_SHADER,gversion+"#define CUBE_MAP_SINGLE_PASS\n"+vertString);
+//		shaders[&renderer]->depthCube.setupShaderFromSource(GL_FRAGMENT_SHADER,gversion+"#define CUBE_MAP_SINGLE_PASS\n"+depthFragShaderSource);
+//		shaders[&renderer]->depthCube.setupShaderFromSource(GL_GEOMETRY_SHADER_EXT,depthCubeGeometryShaderSource);
+//		shaders[&renderer]->depthCube.bindDefaults();
+//		shaders[&renderer]->depthCube.linkProgram();
 		#endif
 		shaders[&renderer]->depthCubeMultiPass.setupShaderFromSource(GL_VERTEX_SHADER,gversion+"#define CUBE_MAP_MULTI_PASS\n"+vertString);
 		shaders[&renderer]->depthCubeMultiPass.setupShaderFromSource(GL_FRAGMENT_SHADER,gversion+"#define CUBE_MAP_MULTI_PASS\n"+depthFragShaderSource);

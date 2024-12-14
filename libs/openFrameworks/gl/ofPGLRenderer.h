@@ -8,6 +8,10 @@
 #include "ofPath.h"
 #include "ofGLBaseTypes.h"
 
+#ifndef TARGET_PORTABLEGL
+#define TARGET_PORTABLEGL 1
+#endif
+
 class ofShapeTessellation;
 class ofFbo;
 class of3dPrimitive;

@@ -4,6 +4,3 @@
 [submodule "scripts/apothecary"]
 	path = scripts/apothecary
 	url = https://github.com/openframeworks/apothecary
-[submodule "libs/portablegl"]
-	path = libs/portablegl
-	url = https://github.com/rswinkle/PortableGL

@@ -62,9 +62,9 @@ void ofSetTextureWrap(GLfloat wrapS, GLfloat wrapT){
 	bUseCustomTextureWrap = true;
 	GLenum textureTarget = GL_TEXTURE_2D;
 #ifndef TARGET_OPENGLES
-	if (ofGetUsingArbTex() && GL_ARB_texture_rectangle){
-		textureTarget = GL_TEXTURE_RECTANGLE_ARB;
-	};
+//	if (ofGetUsingArbTex() && GL_ARB_texture_rectangle){
+//		textureTarget = GL_TEXTURE_RECTANGLE_ARB;
+//	};
 #endif
 	glTexParameterf(textureTarget, GL_TEXTURE_WRAP_S, wrapS);
 	glTexParameterf(textureTarget, GL_TEXTURE_WRAP_T, wrapT);
@@ -85,9 +85,9 @@ void ofSetMinMagFilters(GLfloat minFilter, GLfloat magFilter){
 	bUseCustomMinMagFilters = true;
 	GLenum textureTarget = GL_TEXTURE_2D;
 #ifndef TARGET_OPENGLES
-	if (ofGetUsingArbTex() && GL_ARB_texture_rectangle){
-		textureTarget = GL_TEXTURE_RECTANGLE_ARB;
-	};
+//	if (ofGetUsingArbTex() && GL_ARB_texture_rectangle){
+//		textureTarget = GL_TEXTURE_RECTANGLE_ARB;
+//	};
 #endif
 	glTexParameterf(textureTarget, GL_TEXTURE_MIN_FILTER, minFilter);
 	glTexParameterf(textureTarget, GL_TEXTURE_MAG_FILTER, magFilter);
@@ -393,9 +393,9 @@ void ofTexture::allocate(int w, int h, int glInternalFormat, bool bUseARBExtensi
 	texData.glInternalFormat = glInternalFormat;
 	//our graphics card might not support arb so we have to see if it is supported.
 #ifndef TARGET_OPENGLES
-	if (bUseARBExtension && GL_ARB_texture_rectangle){
-		texData.textureTarget = GL_TEXTURE_RECTANGLE_ARB;
-	} else 
+//	if (bUseARBExtension && GL_ARB_texture_rectangle){
+//		texData.textureTarget = GL_TEXTURE_RECTANGLE_ARB;
+//	} else 
 #endif
 	{
 		texData.textureTarget = GL_TEXTURE_2D;
@@ -469,9 +469,9 @@ void ofTexture::allocate(const ofTextureData & textureData, int glFormat, int pi
 		glTexParameterf(texData.textureTarget, GL_TEXTURE_WRAP_T, texData.wrapModeVertical);
 
 		#ifndef TARGET_PROGRAMMABLE_GL
-			if (!ofIsGLProgrammableRenderer()){
-				glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-			}
+//			if (!ofIsGLProgrammableRenderer()){
+//				glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+//			}
 		#endif
 		glBindTexture(texData.textureTarget,0);
 	}
@@ -486,51 +486,51 @@ void ofTexture::allocate(const ofTextureData & textureData, int glFormat, int pi
 
 void ofTexture::setRGToRGBASwizzles(bool rToRGBSwizzles){
 #ifndef TARGET_OPENGLES
-	glBindTexture(texData.textureTarget,texData.textureID);
-	if(rToRGBSwizzles){
-		if(texData.glInternalFormat==GL_R8 ||
-			texData.glInternalFormat==GL_R16 ||
-			texData.glInternalFormat==GL_R32F||
-			texData.glInternalFormat==GL_DEPTH_COMPONENT
-
-	#ifndef TARGET_OPENGLES
-			||
-			texData.glInternalFormat==GL_DEPTH_COMPONENT16 ||
-			texData.glInternalFormat==GL_DEPTH_COMPONENT24 ||
-			texData.glInternalFormat==GL_DEPTH_COMPONENT32
-
-	#endif
-		   ){
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_R, GL_RED);
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_G, GL_RED);
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_B, GL_RED);
-
-		}else if(texData.glInternalFormat==GL_RG8 ||
-				texData.glInternalFormat==GL_RG16 ||
-				texData.glInternalFormat==GL_RG32F){
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_R, GL_RED);
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_G, GL_RED);
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_B, GL_RED);
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_A, GL_GREEN);
-		}
-	}else{
-		if(texData.glInternalFormat==GL_R8 ||
-				texData.glInternalFormat==GL_R16 ||
-				texData.glInternalFormat==GL_R32F){
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_R, GL_RED);
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_G, GL_GREEN);
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_B, GL_BLUE);
-
-		}else if(texData.glInternalFormat==GL_RG8 ||
-				texData.glInternalFormat==GL_RG16 ||
-				texData.glInternalFormat==GL_RG32F){
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_R, GL_RED);
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_G, GL_GREEN);
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_B, GL_BLUE);
-			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_A, GL_ALPHA);
-		}
-	}
-	glBindTexture(texData.textureTarget,0);
+//	glBindTexture(texData.textureTarget,texData.textureID);
+//	if(rToRGBSwizzles){
+//		if(texData.glInternalFormat==GL_R8 ||
+//			texData.glInternalFormat==GL_R16 ||
+//			texData.glInternalFormat==GL_R32F||
+//			texData.glInternalFormat==GL_DEPTH_COMPONENT
+//
+//	#ifndef TARGET_OPENGLES
+//			||
+//			texData.glInternalFormat==GL_DEPTH_COMPONENT16 ||
+//			texData.glInternalFormat==GL_DEPTH_COMPONENT24 ||
+//			texData.glInternalFormat==GL_DEPTH_COMPONENT32
+//
+//	#endif
+//		   ){
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_R, GL_RED);
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_G, GL_RED);
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_B, GL_RED);
+//
+//		}else if(texData.glInternalFormat==GL_RG8 ||
+//				texData.glInternalFormat==GL_RG16 ||
+//				texData.glInternalFormat==GL_RG32F){
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_R, GL_RED);
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_G, GL_RED);
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_B, GL_RED);
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_A, GL_GREEN);
+//		}
+//	}else{
+//		if(texData.glInternalFormat==GL_R8 ||
+//				texData.glInternalFormat==GL_R16 ||
+//				texData.glInternalFormat==GL_R32F){
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_R, GL_RED);
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_G, GL_GREEN);
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_B, GL_BLUE);
+//
+//		}else if(texData.glInternalFormat==GL_RG8 ||
+//				texData.glInternalFormat==GL_RG16 ||
+//				texData.glInternalFormat==GL_RG32F){
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_R, GL_RED);
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_G, GL_GREEN);
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_B, GL_BLUE);
+//			 glTexParameteri(texData.textureTarget, GL_TEXTURE_SWIZZLE_A, GL_ALPHA);
+//		}
+//	}
+//	glBindTexture(texData.textureTarget,0);
 #endif
 }
 
@@ -760,48 +760,48 @@ void ofTexture::generateMipmap(){
 		
 }
 
-//----------------------------------------------------------
-void ofTexture::loadScreenData(int x, int y, int w, int h){
-	// TODO: this should go into the renderers so it
-	// doesn't depend on global calls
-	int screenHeight = ofGetViewportHeight();
-	y = screenHeight - y;
-	y -= h; // top, bottom issues
-	texData.bFlipTexture = true;
+// //----------------------------------------------------------
+// void ofTexture::loadScreenData(int x, int y, int w, int h){
+// 	// TODO: this should go into the renderers so it
+// 	// doesn't depend on global calls
+// 	int screenHeight = ofGetViewportHeight();
+// 	y = screenHeight - y;
+// 	y -= h; // top, bottom issues
+// 	texData.bFlipTexture = true;
 	
-	if ( w > texData.tex_w || h > texData.tex_h) {
-		ofLogError("ofTexture") << "loadScreenData(): " << w << "x" << h << " image data too big for "
-		<< texData.tex_w << "x " << texData.tex_h << " allocated texture, not uploading";
-		return;
-	}
+// 	if ( w > texData.tex_w || h > texData.tex_h) {
+// 		ofLogError("ofTexture") << "loadScreenData(): " << w << "x" << h << " image data too big for "
+// 		<< texData.tex_w << "x " << texData.tex_h << " allocated texture, not uploading";
+// 		return;
+// 	}
 	
-	//update our size with the new dimensions - this should be the same size or smaller than the allocated texture size
-	texData.width 	= w;
-	texData.height 	= h;
+// 	//update our size with the new dimensions - this should be the same size or smaller than the allocated texture size
+// 	texData.width 	= w;
+// 	texData.height 	= h;
 	
-	//compute new tex co-ords based on the ratio of data's w, h to texture w,h;
-#ifndef TARGET_OPENGLES // DAMIAN
-	if (texData.textureTarget == GL_TEXTURE_RECTANGLE_ARB){
-		texData.tex_t = (float)(w);
-		texData.tex_u = (float)(h);
-	} else 
-#endif
-	{
-		texData.tex_t = (float)(w) / (float)texData.tex_w;
-		texData.tex_u = (float)(h) / (float)texData.tex_h;
-	}
+// 	//compute new tex co-ords based on the ratio of data's w, h to texture w,h;
+// #ifndef TARGET_OPENGLES // DAMIAN
+// //	if (texData.textureTarget == GL_TEXTURE_RECTANGLE_ARB){
+// //		texData.tex_t = (float)(w);
+// //		texData.tex_u = (float)(h);
+// //	} else 
+// #endif
+// 	{
+// 		texData.tex_t = (float)(w) / (float)texData.tex_w;
+// 		texData.tex_u = (float)(h) / (float)texData.tex_h;
+// 	}
 	
 	
-	glBindTexture(texData.textureTarget,texData.textureID);
+// 	glBindTexture(texData.textureTarget,texData.textureID);
 
-	glCopyTexSubImage2D(texData.textureTarget, 0,0,0,x,y,w,h);
+// 	glCopyTexSubImage2D(texData.textureTarget, 0,0,0,x,y,w,h);
 
-	glBindTexture(texData.textureTarget,0);
+// 	glBindTexture(texData.textureTarget,0);
 	
-	if (bWantsMipmap) {
-		generateMipmap();
-	}
-}
+// 	if (bWantsMipmap) {
+// 		generateMipmap();
+// 	}
+// }
 
 
 //we could cap these values - but it might be more useful
@@ -1242,46 +1242,46 @@ ofMesh ofTexture::getQuad(const glm::vec3 & p1, const glm::vec3 & p2, const glm:
 //----------------------------------------------------------
 void ofTexture::readToPixels(ofPixels & pixels) const {
 #ifndef TARGET_OPENGLES
-	pixels.allocate(texData.width,texData.height,ofGetImageTypeFromGLType(texData.glInternalFormat));
-	ofSetPixelStoreiAlignment(GL_PACK_ALIGNMENT,pixels.getWidth(),pixels.getBytesPerChannel(),pixels.getNumChannels());
-	glBindTexture(texData.textureTarget,texData.textureID);
-	glGetTexImage(texData.textureTarget,0,ofGetGLFormat(pixels),GL_UNSIGNED_BYTE, pixels.getData());
-	glBindTexture(texData.textureTarget,0);
+//	pixels.allocate(texData.width,texData.height,ofGetImageTypeFromGLType(texData.glInternalFormat));
+//	ofSetPixelStoreiAlignment(GL_PACK_ALIGNMENT,pixels.getWidth(),pixels.getBytesPerChannel(),pixels.getNumChannels());
+//	glBindTexture(texData.textureTarget,texData.textureID);
+//	glGetTexImage(texData.textureTarget,0,ofGetGLFormat(pixels),GL_UNSIGNED_BYTE, pixels.getData());
+//	glBindTexture(texData.textureTarget,0);
 #endif
 }
 
 //----------------------------------------------------------
 void ofTexture::readToPixels(ofShortPixels & pixels) const {
 #ifndef TARGET_OPENGLES
-	pixels.allocate(texData.width,texData.height,ofGetImageTypeFromGLType(texData.glInternalFormat));
-	ofSetPixelStoreiAlignment(GL_PACK_ALIGNMENT,pixels.getWidth(),pixels.getBytesPerChannel(),pixels.getNumChannels());
-	glBindTexture(texData.textureTarget,texData.textureID);
-	glGetTexImage(texData.textureTarget,0,ofGetGLFormat(pixels),GL_UNSIGNED_SHORT,pixels.getData());
-	glBindTexture(texData.textureTarget,0);
+//	pixels.allocate(texData.width,texData.height,ofGetImageTypeFromGLType(texData.glInternalFormat));
+//	ofSetPixelStoreiAlignment(GL_PACK_ALIGNMENT,pixels.getWidth(),pixels.getBytesPerChannel(),pixels.getNumChannels());
+//	glBindTexture(texData.textureTarget,texData.textureID);
+//	glGetTexImage(texData.textureTarget,0,ofGetGLFormat(pixels),GL_UNSIGNED_SHORT,pixels.getData());
+//	glBindTexture(texData.textureTarget,0);
 #endif
 }
 
 void ofTexture::readToPixels(ofFloatPixels & pixels) const {
 #ifndef TARGET_OPENGLES
-	pixels.allocate(texData.width,texData.height,ofGetImageTypeFromGLType(texData.glInternalFormat));
-	ofSetPixelStoreiAlignment(GL_PACK_ALIGNMENT,pixels.getWidth(),pixels.getBytesPerChannel(),pixels.getNumChannels());
-	glBindTexture(texData.textureTarget,texData.textureID);
-	glGetTexImage(texData.textureTarget,0,ofGetGLFormat(pixels),GL_FLOAT,pixels.getData());
-	glBindTexture(texData.textureTarget,0);
+//	pixels.allocate(texData.width,texData.height,ofGetImageTypeFromGLType(texData.glInternalFormat));
+//	ofSetPixelStoreiAlignment(GL_PACK_ALIGNMENT,pixels.getWidth(),pixels.getBytesPerChannel(),pixels.getNumChannels());
+//	glBindTexture(texData.textureTarget,texData.textureID);
+//	glGetTexImage(texData.textureTarget,0,ofGetGLFormat(pixels),GL_FLOAT,pixels.getData());
+//	glBindTexture(texData.textureTarget,0);
 #endif
 }
 
 #ifndef TARGET_OPENGLES
-//----------------------------------------------------------
-void ofTexture::copyTo(ofBufferObject & buffer) const{
-	ofSetPixelStoreiAlignment(GL_PACK_ALIGNMENT,getWidth(),ofGetBytesPerChannelFromGLType(ofGetGLTypeFromInternal(texData.glInternalFormat)),ofGetNumChannelsFromGLFormat(ofGetGLFormatFromInternal(texData.glInternalFormat)));
-	buffer.bind(GL_PIXEL_PACK_BUFFER);
-	glBindTexture(texData.textureTarget,texData.textureID);
-	glGetTexImage(texData.textureTarget,0,ofGetGLFormatFromInternal(texData.glInternalFormat),ofGetGLTypeFromInternal(texData.glInternalFormat),0);
-	glBindTexture(texData.textureTarget,0);
-	buffer.unbind(GL_PIXEL_PACK_BUFFER);
-
-}
+////----------------------------------------------------------
+//void ofTexture::copyTo(ofBufferObject & buffer) const{
+//	ofSetPixelStoreiAlignment(GL_PACK_ALIGNMENT,getWidth(),ofGetBytesPerChannelFromGLType(ofGetGLTypeFromInternal(texData.glInternalFormat)),ofGetNumChannelsFromGLFormat(ofGetGLFormatFromInternal(texData.glInternalFormat)));
+//	buffer.bind(GL_PIXEL_PACK_BUFFER);
+//	glBindTexture(texData.textureTarget,texData.textureID);
+//	glGetTexImage(texData.textureTarget,0,ofGetGLFormatFromInternal(texData.glInternalFormat),ofGetGLTypeFromInternal(texData.glInternalFormat),0);
+//	glBindTexture(texData.textureTarget,0);
+//	buffer.unbind(GL_PIXEL_PACK_BUFFER);
+//
+//}
 #endif
 
 //----------------------------------------------------------
