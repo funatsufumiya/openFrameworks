@@ -41,17 +41,17 @@ public:
 	void unbind(GLenum target) const;
 
 #if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-	/// glBindBufferBase: https://www.opengl.org/sdk/docs/man4/html/glBindBufferBase.xhtml
-	void bindBase(GLenum target,GLuint index) const;
+	// /// glBindBufferBase: https://www.opengl.org/sdk/docs/man4/html/glBindBufferBase.xhtml
+	// void bindBase(GLenum target,GLuint index) const;
 
-	/// binds the given target and index to buffer 0
-	void unbindBase(GLenum target,GLuint index) const;
+	// /// binds the given target and index to buffer 0
+	// void unbindBase(GLenum target,GLuint index) const;
 
-	/// glBindBufferRange: https://www.opengl.org/sdk/docs/man4/html/glBindBufferRange.xhtml
-	void bindRange(GLenum target,GLuint index, GLintptr offset, GLsizeiptr size) const;
+	// /// glBindBufferRange: https://www.opengl.org/sdk/docs/man4/html/glBindBufferRange.xhtml
+	// void bindRange(GLenum target,GLuint index, GLintptr offset, GLsizeiptr size) const;
 
-	/// binds the given target and index to 0
-	void unbindRange(GLenum target,GLuint index) const;
+	// /// binds the given target and index to 0
+	// void unbindRange(GLenum target,GLuint index) const;
 #endif
 
 	/// returns the id of the buffer if it's allocated or 0 otherwise

@@ -82,32 +82,32 @@ void ofBufferObject::unbind(GLenum target) const{
 }
 
 #if !defined(TARGET_OPENGLES) || defined(TARGET_EMSCRIPTEN)
-void ofBufferObject::bindBase(GLenum target,GLuint index) const{
-	if(data){
-		glBindBufferBase(target,index,data->id);
-		data->lastTarget = target;
-		data->isBound = true;
-	}
-}
-
-void ofBufferObject::unbindBase(GLenum target,GLuint index) const{
-	glBindBufferBase(target,index,0);
-	if(data){
-		data->isBound = false;
-	}
-}
-
-void ofBufferObject::bindRange(GLenum target,GLuint index, GLintptr offset, GLsizeiptr size) const{
-	if(data){
-		glBindBufferRange(target,index,data->id,offset,size);
-		data->lastTarget = target;
-		data->isBound = true;
-	}
-}
-
-void ofBufferObject::unbindRange(GLenum target,GLuint index) const{
-	glBindBufferBase(target,index,0);
-}
+//void ofBufferObject::bindBase(GLenum target,GLuint index) const{
+//	if(data){
+//		glBindBufferBase(target,index,data->id);
+//		data->lastTarget = target;
+//		data->isBound = true;
+//	}
+//}
+//
+//void ofBufferObject::unbindBase(GLenum target,GLuint index) const{
+//	glBindBufferBase(target,index,0);
+//	if(data){
+//		data->isBound = false;
+//	}
+//}
+//
+//void ofBufferObject::bindRange(GLenum target,GLuint index, GLintptr offset, GLsizeiptr size) const{
+//	if(data){
+//		glBindBufferRange(target,index,data->id,offset,size);
+//		data->lastTarget = target;
+//		data->isBound = true;
+//	}
+//}
+//
+//void ofBufferObject::unbindRange(GLenum target,GLuint index) const{
+//	glBindBufferBase(target,index,0);
+//}
 #endif
 
 GLuint ofBufferObject::getId() const{
